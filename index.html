@@ -2,77 +2,351 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>一封信</title>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: "微软雅黑", sans-serif;
-      background-color: #fff8f0;
-      color: #333;
-      max-width: 600px;
-      margin: 100px auto;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      line-height: 1.8;
+      margin: 0;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-family: "Microsoft YaHei", sans-serif;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff1f5,
+          #ffe4ec,
+          #fff8f0
+        );
+
+      overflow: hidden;
+    }
+
+    .container {
       text-align: center;
     }
-    .title {
-      font-size: 24px;
-      color: #e91e63;
-      margin-bottom: 20px;
-      text-align: left;
-    }
-    .content {
-      white-space: pre-line;
+
+    .hint {
       margin-bottom: 30px;
-      text-align: left;
+      color: #8a5a66;
+      font-size: 18px;
     }
-    .signature {
-      margin-top: 30px;
-      text-align: right;
-      font-weight: bold;
-      color: #e91e63;
-    }
-    .btn {
-      display: inline-block;
-      margin: 10px 20px;
-      padding: 10px 20px;
-      background-color: #e91e63;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
+
+    .envelope {
+      position: relative;
+
+      width: 320px;
+      height: 210px;
+
+      background: #f7b5c5;
+
+      border-radius: 8px;
+
       cursor: pointer;
+
+      box-shadow:
+        0 20px 50px rgba(100, 50, 70, 0.2);
+
+      transition:
+        transform 0.3s ease;
     }
-    .btn:hover {
-      background-color: #d81b60;
+
+    .envelope:hover {
+      transform: translateY(-8px);
     }
-    .disabled {
-      background-color: #aaa;
-      cursor: not-allowed;
+
+    .envelope::before {
+      content: "";
+
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-top: 110px solid #ee91aa;
+
+      transform-origin: top;
+
+      transition:
+        transform 0.8s ease;
+
+      z-index: 3;
+    }
+
+    .envelope.open::before {
+      transform: rotateX(180deg);
+
+      z-index: 0;
+    }
+
+    .letter {
+      position: absolute;
+
+      width: 280px;
+      height: 190px;
+
+      left: 20px;
+      bottom: 10px;
+
+      background: white;
+
+      border-radius: 10px;
+
+      padding: 25px;
+
+      text-align: left;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.15);
+
+      transform: translateY(0);
+
+      transition:
+        transform 1s ease,
+        height 1s ease;
+
+      z-index: 1;
+
+      overflow: hidden;
+    }
+
+    .envelope.open .letter {
+      transform: translateY(-150px);
+
+      height: 350px;
+    }
+
+    .letter h2 {
+      color: #e05b7d;
+
+      margin-top: 0;
+    }
+
+    .letter p {
+      color: #555;
+
+      line-height: 1.8;
+    }
+
+    .buttons {
+      margin-top: 25px;
+
+      display: flex;
+
+      gap: 15px;
+
+      justify-content: center;
+    }
+
+    button {
+      border: none;
+
+      padding: 10px 20px;
+
+      border-radius: 20px;
+
+      font-size: 15px;
+
+      cursor: pointer;
+
+      transition: 0.3s;
+    }
+
+    .accept {
+      background: #e85f82;
+
+      color: white;
+    }
+
+    .accept:hover {
+      transform: scale(1.08);
+
+      background: #d94d70;
+    }
+
+    .reject {
+      background: #eee;
+
+      color: #555;
+    }
+
+    .hidden {
+      opacity: 0;
+
+      pointer-events: none;
+    }
+
+    .letter-content {
+      opacity: 0;
+
+      transition:
+        opacity 1s ease 0.6s;
+    }
+
+    .envelope.open .letter-content {
+      opacity: 1;
+    }
+
+    @media (max-width: 500px) {
+      .envelope {
+        width: 280px;
+        height: 190px;
+      }
+
+      .envelope::before {
+        border-left-width: 140px;
+        border-right-width: 140px;
+      }
+
+      .letter {
+        width: 240px;
+
+        left: 20px;
+      }
     }
   </style>
-  <script>
-    function accept() {
-      alert("哇塞其实第一次点的接受吧不然本人生气了");
-    }
-    function reject() {
-      alert("❌不行这个不能点");
-    }
-  </script>
 </head>
-<body>
-  <div class="title">hi子禾羊：</div>
-  <div class="content">
-这是一个全网最帅的人给你发的，一定要点“接受”。
-如果你点“不接受”，我就生气了。
 
-喵喵喵喵喵喵喵喵喵喵喵
+<body>
+
+  <div class="container">
+
+    <div class="hint">
+      💌 你收到了一封信，点开看看
+    </div>
+
+    <div
+      class="envelope"
+      id="envelope"
+      onclick="openLetter()"
+    >
+
+      <div class="letter">
+
+        <div class="letter-content">
+
+          <h2>
+            Hi 子禾羊：
+          </h2>
+
+          <p>
+            这是一个全网最帅的人给你发的。
+          </p>
+
+          <p>
+            本来只是想写一封普通的信，
+            但是觉得普通的信有点太无聊了。
+          </p>
+
+          <p>
+            所以做成了一个网页。
+          </p>
+
+          <div class="buttons">
+
+            <button
+              class="accept"
+              onclick="acceptLetter(event)"
+            >
+              💖 接受
+            </button>
+
+            <button
+              class="reject"
+              id="rejectBtn"
+              onmouseover="moveButton()"
+            >
+              ❌ 不接受
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <button class="btn" onclick="accept()">💖 接 受 💖</button>
-  <button class="btn disabled" onclick="reject()">❌ 不接受</button>
 
-  <div class="signature">——qyyyyyyyy</div>
+  <script>
+
+    let opened = false;
+
+    function openLetter() {
+
+      if (opened) {
+        return;
+      }
+
+      document
+        .getElementById("envelope")
+        .classList
+        .add("open");
+
+      opened = true;
+    }
+
+
+    function acceptLetter(event) {
+
+      event.stopPropagation();
+
+      document.body.innerHTML = `
+        <div style="
+          text-align:center;
+          font-family:Microsoft YaHei;
+        ">
+
+          <h1 style="
+            font-size:60px;
+          ">
+            💖
+          </h1>
+
+          <h2 style="
+            color:#e05b7d;
+          ">
+            我就知道你会点接受
+          </h2>
+
+          <p>
+            好啦，这封信你已经签收成功。
+          </p>
+
+        </div>
+      `;
+    }
+
+
+    function moveButton() {
+
+      const button =
+        document.getElementById("rejectBtn");
+
+      const x =
+        Math.random() * 200 - 100;
+
+      const y =
+        Math.random() * 120 - 60;
+
+      button.style.transform =
+        `translate(${x}px, ${y}px)`;
+    }
+
+  </script>
+
 </body>
 </html>
