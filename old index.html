@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>一封信</title>
+  <style>
+    body {
+      font-family: "微软雅黑", sans-serif;
+      background-color: #fff8f0;
+      color: #333;
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      line-height: 1.8;
+      text-align: center;
+    }
+    .title {
+      font-size: 24px;
+      color: #e91e63;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .content {
+      white-space: pre-line;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+    .signature {
+      margin-top: 30px;
+      text-align: right;
+      font-weight: bold;
+      color: #e91e63;
+    }
+    .btn {
+      display: inline-block;
+      margin: 10px 20px;
+      padding: 10px 20px;
+      background-color: #e91e63;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #d81b60;
+    }
+    .disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+  </style>
+  <script>
+    function accept() {
+      alert("哇塞其实第一次点的接受吧不然本人生气了");
+    }
+    function reject() {
+      alert("❌不行这个不能点");
+    }
+  </script>
+</head>
+<body>
+  <div class="title">hi子禾羊：</div>
+  <div class="content">
+这是一个全网最帅的人给你发的，一定要点“接受”。
+如果你点“不接受”，我就生气了。
+
+喵喵喵喵喵喵喵喵喵喵喵
+  </div>
+
+  <button class="btn" onclick="accept()">💖 接 受 💖</button>
+  <button class="btn disabled" onclick="reject()">❌ 不接受</button>
+
+  <div class="signature">——qyyyyyyyy</div>
+</body>
+</html>
