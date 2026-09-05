@@ -12,6 +12,7 @@ html {
 
 body {
   margin: 0;
+
   min-height: 100vh;
 
   font-family:
@@ -20,14 +21,14 @@ body {
     "Segoe UI",
     sans-serif;
 
-  color: #30282b;
+  color: #382d31;
 
   background:
     radial-gradient(
       circle at top,
       #fffafb 0%,
       #fceef2 48%,
-      #f8e7ec 100%
+      #f7e5eb 100%
     );
 
   overflow-x: hidden;
@@ -35,18 +36,21 @@ body {
 
 
 /* =========================
-   PAGE
+   LANDING PAGE
 ========================= */
 
 .page {
-  width: 100%;
   min-height: 100vh;
 
   display: flex;
   flex-direction: column;
+
+  justify-content: center;
   align-items: center;
 
-  padding: 90px 20px 180px;
+  padding:
+    70px 20px
+    120px;
 }
 
 
@@ -56,25 +60,47 @@ body {
 
 .hero {
   width: 100%;
-  max-width: 1000px;
+
+  max-width: 1100px;
 
   text-align: center;
 
-  margin-bottom: 70px;
+  margin-bottom: 65px;
 
-  animation: fadeIn 1.2s ease;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease,
+    filter 0.8s ease;
 }
 
+
+.hero.fade-away {
+  opacity: 0;
+
+  transform:
+    translateY(-30px)
+    scale(0.96);
+
+  filter:
+    blur(5px);
+
+  pointer-events: none;
+}
+
+
 .eyebrow {
-  margin: 0 0 18px;
+  margin:
+    0 0 18px;
 
   font-size: 12px;
-  font-weight: 500;
+
+  font-weight: 600;
 
   letter-spacing: 5px;
 
-  color: #a97f8b;
+  color: #aa808d;
 }
+
 
 .hero h1 {
   margin: 0;
@@ -84,21 +110,24 @@ body {
     "Times New Roman",
     serif;
 
-  font-size: clamp(
-    44px,
-    6vw,
-    78px
-  );
+  font-size:
+    clamp(
+      44px,
+      6vw,
+      78px
+    );
 
   line-height: 1.08;
 
   font-weight: 500;
 
-  color: #3f3035;
+  color: #403136;
 }
 
+
 .subtitle {
-  margin: 22px 0 0;
+  margin:
+    22px 0 0;
 
   font-size: 17px;
 
@@ -107,7 +136,7 @@ body {
 
 
 /* =========================
-   LETTER SECTION
+   LETTER AREA
 ========================= */
 
 .letter-section {
@@ -115,20 +144,41 @@ body {
 
   display: flex;
   flex-direction: column;
+
   align-items: center;
 
   text-align: center;
+
+  transition:
+    transform 0.9s ease;
 }
 
-.hint {
-  margin: 0 0 38px;
 
-  font-size: 16px;
+.letter-section.focused {
+  transform:
+    translateY(-100px);
+}
+
+
+.hint {
+  margin:
+    0 0 36px;
 
   color: #987681;
 
+  font-size: 16px;
+
   transition:
-    opacity 0.4s ease;
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+
+.hint.hide {
+  opacity: 0;
+
+  transform:
+    translateY(-10px);
 }
 
 
@@ -144,32 +194,36 @@ body {
 
   background: #e9aec0;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
   cursor: pointer;
 
   box-shadow:
-    0 25px 70px
-    rgba(106, 60, 78, 0.22);
+    0 28px 70px
+    rgba(
+      105,
+      60,
+      78,
+      0.22
+    );
 
   transition:
-    transform 0.4s ease,
-    margin 0.9s ease;
+    transform 0.45s ease;
 }
+
 
 .envelope:hover {
-  transform: translateY(-8px);
+  transform:
+    translateY(-8px);
 }
 
-
-/* Open state */
 
 .envelope.open {
-  margin-top: 170px;
-  margin-bottom: 300px;
-
   cursor: default;
+
+  transform: none;
 }
+
 
 .envelope.open:hover {
   transform: none;
@@ -201,15 +255,78 @@ body {
   transform-origin: top;
 
   transition:
-    transform 0.9s ease;
+    transform 0.8s ease;
 
-  z-index: 4;
+  z-index: 5;
 }
 
+
 .envelope.open .flap {
-  transform: rotateX(180deg);
+  transform:
+    rotateX(180deg);
 
   z-index: 1;
+}
+
+
+/* =========================
+   ENVELOPE POCKET
+========================= */
+
+.envelope-pocket {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  z-index: 3;
+}
+
+
+.envelope-pocket::before {
+  content: "";
+
+  position: absolute;
+
+  bottom: 0;
+  left: 0;
+
+  width: 0;
+  height: 0;
+
+  border-left:
+    180px solid #efbfd0;
+
+  border-top:
+    115px solid transparent;
+
+  border-bottom:
+    115px solid transparent;
+}
+
+
+.envelope-pocket::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: 0;
+  right: 0;
+
+  width: 0;
+  height: 0;
+
+  border-right:
+    180px solid #e5a6ba;
+
+  border-top:
+    115px solid transparent;
+
+  border-bottom:
+    115px solid transparent;
 }
 
 
@@ -226,50 +343,55 @@ body {
   left: 20px;
   bottom: 16px;
 
-  padding: 32px;
+  padding: 34px;
 
-  background: #fffdf9;
+  background:
+    #fffdf9;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
   text-align: left;
 
   overflow: hidden;
 
   box-shadow:
-    0 12px 35px
-    rgba(70, 45, 55, 0.14);
+    0 16px 40px
+    rgba(
+      70,
+      45,
+      55,
+      0.15
+    );
 
   transition:
-    width 0.9s ease,
-    height 0.9s ease,
-    left 0.9s ease,
-    transform 0.9s ease,
-    padding 0.9s ease;
+    width 1s ease,
+    height 1s ease,
+    left 1s ease,
+    transform 1s ease,
+    padding 1s ease;
 
   z-index: 2;
 }
 
 
-/*
-   IMPORTANT:
-   When opened the letter becomes
-   a wider card instead of a tall strip.
-*/
+/* Opened letter */
 
 .envelope.open .letter {
-  width: 560px;
-  height: 500px;
+  width: 620px;
+  height: 570px;
 
   left: 50%;
 
-  padding: 45px 52px;
+  padding:
+    48px 58px;
 
   transform:
     translateX(-50%)
-    translateY(-175px);
+    translateY(-185px);
 
   overflow-y: auto;
+
+  z-index: 10;
 }
 
 
@@ -281,33 +403,40 @@ body {
   opacity: 0;
 
   transition:
-    opacity 0.8s ease 0.7s;
+    opacity 0.8s ease
+    0.65s;
 }
 
-.envelope.open .letter-content {
+
+.envelope.open
+.letter-content {
   opacity: 1;
 }
 
+
 .date {
-  margin: 0 0 12px;
+  margin:
+    0 0 12px;
 
   font-size: 13px;
 
-  letter-spacing: 0.5px;
+  letter-spacing:
+    0.5px;
 
   color: #b08b96;
 }
 
+
 .letter h2 {
   margin:
-    0 0 25px;
+    0 0 26px;
 
   font-family:
     Georgia,
     "Times New Roman",
     serif;
 
-  font-size: 30px;
+  font-size: 32px;
 
   line-height: 1.2;
 
@@ -318,15 +447,15 @@ body {
 
 
 /* =========================
-   MESSAGE
+   TYPEWRITER MESSAGE
 ========================= */
 
 .message {
-  min-height: 280px;
+  min-height: 320px;
 
   font-size: 15px;
 
-  line-height: 1.85;
+  line-height: 1.9;
 
   color: #5f5558;
 
@@ -334,25 +463,44 @@ body {
 }
 
 
+/* Blinking cursor */
+
+.message.typing::after {
+  content: "|";
+
+  margin-left: 2px;
+
+  color: #bd7288;
+
+  animation:
+    blink 0.8s infinite;
+}
+
+
 /* =========================
-   BUTTON
+   CONTINUE BUTTON
 ========================= */
 
 .continue-button {
   width: 100%;
 
-  margin-top: 20px;
+  margin-top: 18px;
 
-  padding: 14px 22px;
+  padding:
+    14px 22px;
 
   border: none;
-  border-radius: 999px;
 
-  background: #c97790;
+  border-radius:
+    999px;
+
+  background:
+    #c97790;
 
   color: white;
 
   font-size: 15px;
+
   font-weight: 500;
 
   cursor: pointer;
@@ -371,6 +519,7 @@ body {
     box-shadow 0.3s ease;
 }
 
+
 .continue-button.show {
   opacity: 1;
 
@@ -380,20 +529,441 @@ body {
   pointer-events: auto;
 }
 
+
 .continue-button:hover {
-  background: #b9647f;
+  background:
+    #b96580;
 
   transform:
     translateY(-2px);
 
   box-shadow:
-    0 8px 20px
-    rgba(185, 100, 127, 0.22);
+    0 9px 22px
+    rgba(
+      185,
+      101,
+      128,
+      0.22
+    );
 }
 
 
 /* =========================
-   FLOATING HEARTS
+   WRITER PAGE
+========================= */
+
+.hidden-page {
+  display: none;
+}
+
+
+.writer-page {
+  min-height: 100vh;
+
+  padding:
+    80px 20px;
+
+  animation:
+    fadeIn 0.8s ease;
+}
+
+
+.writer-container {
+  width: 100%;
+
+  max-width: 760px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+
+.writer-container > h1 {
+  margin:
+    0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      40px,
+      6vw,
+      64px
+    );
+
+  font-weight: 500;
+
+  color: #423237;
+}
+
+
+.writer-subtitle {
+  margin:
+    18px auto 40px;
+
+  max-width: 540px;
+
+  line-height: 1.7;
+
+  color: #927780;
+}
+
+
+/* =========================
+   WRITER CARD
+========================= */
+
+.writer-card {
+  padding:
+    42px;
+
+  text-align: left;
+
+  background:
+    rgba(
+      255,
+      253,
+      249,
+      0.92
+    );
+
+  border:
+    1px solid
+    rgba(
+      193,
+      133,
+      152,
+      0.18
+    );
+
+  border-radius:
+    20px;
+
+  box-shadow:
+    0 25px 65px
+    rgba(
+      105,
+      60,
+      78,
+      0.12
+    );
+
+  backdrop-filter:
+    blur(12px);
+}
+
+
+.writer-card label {
+  display: block;
+
+  margin:
+    0 0 9px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #654d55;
+}
+
+
+.writer-card input {
+  width: 100%;
+
+  margin-bottom:
+    28px;
+
+  padding:
+    14px 16px;
+
+  border:
+    1px solid
+    #ead5dc;
+
+  border-radius:
+    10px;
+
+  outline: none;
+
+  background:
+    white;
+
+  color: #55474c;
+
+  font-size: 15px;
+
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.writer-card textarea {
+  width: 100%;
+
+  min-height: 260px;
+
+  resize: vertical;
+
+  padding:
+    18px;
+
+  border:
+    1px solid
+    #ead5dc;
+
+  border-radius:
+    12px;
+
+  outline: none;
+
+  background:
+    white;
+
+  color: #55474c;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.writer-card input:focus,
+.writer-card textarea:focus {
+  border-color:
+    #cc899d;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(
+      204,
+      137,
+      157,
+      0.12
+    );
+}
+
+
+/* =========================
+   WRITER BUTTONS
+========================= */
+
+.writer-actions {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 25px;
+}
+
+
+.save-button,
+.secondary-button {
+  padding:
+    13px 22px;
+
+  border: none;
+
+  border-radius:
+    999px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  transition:
+    0.3s ease;
+}
+
+
+.save-button {
+  background:
+    #c97790;
+
+  color: white;
+}
+
+
+.save-button:hover {
+  background:
+    #b96580;
+
+  transform:
+    translateY(-2px);
+}
+
+
+.secondary-button {
+  background:
+    #f3e7eb;
+
+  color:
+    #715861;
+}
+
+
+.secondary-button:hover {
+  background:
+    #ebd9df;
+}
+
+
+.save-message {
+  min-height:
+    22px;
+
+  margin:
+    20px 0 0;
+
+  text-align: center;
+
+  font-size: 14px;
+
+  color:
+    #aa667c;
+}
+
+
+/* =========================
+   SAVED LETTER
+========================= */
+
+.saved-letter {
+  display: none;
+
+  margin-top:
+    35px;
+
+  padding:
+    35px;
+
+  text-align: left;
+
+  background:
+    rgba(
+      255,
+      253,
+      249,
+      0.8
+    );
+
+  border-radius:
+    18px;
+
+  box-shadow:
+    0 20px 50px
+    rgba(
+      105,
+      60,
+      78,
+      0.1
+    );
+
+  animation:
+    fadeIn 0.6s ease;
+}
+
+
+.saved-letter.show {
+  display: block;
+}
+
+
+.saved-label {
+  margin:
+    0 0 12px;
+
+  font-size: 11px;
+
+  letter-spacing: 3px;
+
+  font-weight: 600;
+
+  color:
+    #b48392;
+}
+
+
+.saved-letter h2 {
+  margin:
+    0 0 12px;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 28px;
+
+  font-weight: 500;
+
+  color:
+    #554047;
+}
+
+
+.saved-date {
+  color:
+    #aa7f8c;
+
+  font-size: 14px;
+}
+
+
+.saved-preview {
+  margin-top:
+    20px;
+
+  line-height:
+    1.8;
+
+  white-space:
+    pre-line;
+
+  color:
+    #66585d;
+}
+
+
+.delete-button {
+  margin-top:
+    15px;
+
+  padding: 0;
+
+  border: none;
+
+  background:
+    transparent;
+
+  color:
+    #b06d80;
+
+  cursor: pointer;
+
+  text-decoration:
+    underline;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   BACKGROUND HEARTS
 ========================= */
 
 .background-hearts {
@@ -408,73 +978,18 @@ body {
   z-index: -1;
 }
 
+
 .heart {
   position: absolute;
 
   bottom: -50px;
 
-  opacity: 0.15;
+  opacity: 0.14;
 
   color: #c78c9e;
 
   animation:
     floatUp linear forwards;
-}
-
-
-/* =========================
-   FINAL SCREEN
-========================= */
-
-.final-screen {
-  min-height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
-  padding: 30px;
-
-  text-align: center;
-
-  background:
-    radial-gradient(
-      circle at center,
-      #fffafb,
-      #fceef2
-    );
-
-  animation:
-    fadeIn 1s ease;
-}
-
-.final-screen h1 {
-  margin: 0 0 18px;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: clamp(
-    40px,
-    6vw,
-    64px
-  );
-
-  font-weight: 500;
-
-  color: #49363c;
-}
-
-.final-screen p {
-  margin: 0;
-
-  font-size: 18px;
-
-  color: #90747d;
 }
 
 
@@ -488,7 +1003,7 @@ body {
     opacity: 0;
 
     transform:
-      translateY(15px);
+      translateY(18px);
   }
 
   to {
@@ -496,6 +1011,20 @@ body {
 
     transform:
       translateY(0);
+  }
+}
+
+
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
   }
 }
 
@@ -522,39 +1051,53 @@ body {
    TABLET
 ========================= */
 
-@media (max-width: 700px) {
+@media (
+  max-width: 720px
+) {
 
   .page {
-    padding:
-      70px 18px
-      180px;
+    justify-content:
+      flex-start;
+
+    padding-top:
+      70px;
   }
+
 
   .hero {
-    margin-bottom: 55px;
+    margin-bottom:
+      55px;
   }
 
-  .hero h1 {
-    font-size: 48px;
+
+  .letter-section.focused {
+    transform:
+      translateY(-70px);
   }
 
-  .envelope.open {
-    margin-top: 150px;
-    margin-bottom: 320px;
-  }
 
   .envelope.open .letter {
-    width: 90vw;
-    max-width: 520px;
+    width:
+      min(
+        92vw,
+        580px
+      );
 
-    height: 500px;
+    height:
+      560px;
 
     padding:
-      40px 38px;
+      42px 40px;
 
     transform:
       translateX(-50%)
-      translateY(-160px);
+      translateY(-170px);
+  }
+
+
+  .writer-card {
+    padding:
+      32px;
   }
 
 }
@@ -564,45 +1107,52 @@ body {
    MOBILE
 ========================= */
 
-@media (max-width: 520px) {
+@media (
+  max-width: 520px
+) {
 
   .page {
     padding:
       55px 15px
-      180px;
+      160px;
   }
 
-  .hero {
-    margin-bottom: 45px;
-  }
-
-  .eyebrow {
-    font-size: 10px;
-
-    letter-spacing: 3px;
-  }
 
   .hero h1 {
-    font-size: 40px;
+    font-size:
+      40px;
   }
+
+
+  .eyebrow {
+    font-size:
+      10px;
+
+    letter-spacing:
+      3px;
+  }
+
 
   .subtitle {
-    font-size: 15px;
+    font-size:
+      15px;
   }
+
 
   .hint {
-    font-size: 14px;
-
-    margin-bottom: 30px;
+    font-size:
+      14px;
   }
 
-
-  /* smaller envelope */
 
   .envelope {
-    width: 290px;
-    height: 190px;
+    width:
+      290px;
+
+    height:
+      190px;
   }
+
 
   .flap {
     border-left-width:
@@ -615,50 +1165,110 @@ body {
       105px;
   }
 
+
+  .envelope-pocket::before {
+    border-left-width:
+      145px;
+
+    border-top-width:
+      95px;
+
+    border-bottom-width:
+      95px;
+  }
+
+
+  .envelope-pocket::after {
+    border-right-width:
+      145px;
+
+    border-top-width:
+      95px;
+
+    border-bottom-width:
+      95px;
+  }
+
+
   .letter {
-    width: 254px;
-    height: 165px;
+    width:
+      254px;
 
-    left: 18px;
+    height:
+      165px;
 
-    padding: 22px;
-  }
-
-
-  /* opened mobile letter */
-
-  .envelope.open {
-    margin-top: 145px;
-    margin-bottom: 340px;
-  }
-
-  .envelope.open .letter {
-    width: 92vw;
-
-    height: 500px;
-
-    left: 50%;
+    left:
+      18px;
 
     padding:
-      32px 28px;
+      22px;
+  }
+
+
+  .letter-section.focused {
+    transform:
+      translateY(-30px);
+  }
+
+
+  .envelope.open .letter {
+    width:
+      92vw;
+
+    height:
+      540px;
+
+    left:
+      50%;
+
+    padding:
+      32px 27px;
 
     transform:
       translateX(-50%)
-      translateY(-140px);
+      translateY(-145px);
   }
+
 
   .letter h2 {
-    font-size: 26px;
-
-    margin-bottom: 20px;
+    font-size:
+      26px;
   }
 
+
   .message {
-    min-height: 290px;
+    min-height:
+      320px;
 
-    font-size: 14px;
+    font-size:
+      14px;
 
-    line-height: 1.75;
+    line-height:
+      1.75;
+  }
+
+
+  .writer-page {
+    padding:
+      60px 15px;
+  }
+
+
+  .writer-card {
+    padding:
+      25px 20px;
+  }
+
+
+  .writer-actions {
+    flex-direction:
+      column-reverse;
+  }
+
+
+  .writer-actions button {
+    width:
+      100%;
   }
 
 }
