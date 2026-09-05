@@ -29,6 +29,11 @@ body {
   overflow-x: hidden;
 }
 
+
+/* =========================
+   PAGE
+========================= */
+
 .page {
   min-height: 100vh;
 
@@ -38,8 +43,13 @@ body {
   justify-content: center;
   align-items: center;
 
-  padding: 60px 20px;
+  padding: 60px 20px 120px;
 }
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
   text-align: center;
@@ -83,8 +93,15 @@ body {
   font-size: 17px;
 }
 
+
+/* =========================
+   LETTER SECTION
+========================= */
+
 .letter-section {
   text-align: center;
+
+  width: 100%;
 }
 
 .hint {
@@ -92,9 +109,16 @@ body {
 
   margin-bottom: 30px;
 
+  font-size: 17px;
+
   transition:
     opacity 0.5s ease;
 }
+
+
+/* =========================
+   ENVELOPE
+========================= */
 
 .envelope {
   width: 340px;
@@ -115,7 +139,8 @@ body {
     rgba(110, 70, 85, 0.2);
 
   transition:
-    transform 0.35s ease;
+    transform 0.35s ease,
+    margin 0.8s ease;
 }
 
 .envelope:hover {
@@ -123,6 +148,19 @@ body {
     translateY(-8px)
     rotate(-1deg);
 }
+
+
+/* 打开后给信纸留出空间 */
+
+.envelope.open {
+  margin-top: 80px;
+  margin-bottom: 330px;
+}
+
+
+/* =========================
+   ENVELOPE FLAP
+========================= */
 
 .flap {
   position: absolute;
@@ -151,10 +189,16 @@ body {
 }
 
 .envelope.open .flap {
-  transform: rotateX(180deg);
+  transform:
+    rotateX(180deg);
 
   z-index: 1;
 }
+
+
+/* =========================
+   LETTER
+========================= */
 
 .letter {
   position: absolute;
@@ -186,12 +230,22 @@ body {
   z-index: 2;
 }
 
+
+/* 打开后的信纸 */
+
 .envelope.open .letter {
   transform:
-    translateY(-185px);
+    translateY(-130px);
 
-  height: 430px;
+  height: 520px;
+
+  overflow-y: auto;
 }
+
+
+/* =========================
+   LETTER CONTENT
+========================= */
 
 .letter-content {
   opacity: 0;
@@ -205,6 +259,7 @@ body {
   opacity: 1;
 }
 
+
 .date {
   font-size: 13px;
 
@@ -212,6 +267,7 @@ body {
 
   margin-top: 0;
 }
+
 
 .letter h2 {
   font-family: Georgia, serif;
@@ -221,10 +277,17 @@ body {
   font-weight: 500;
 
   margin-top: 10px;
+
+  font-size: 26px;
 }
 
+
+/* =========================
+   MESSAGE
+========================= */
+
 .message {
-  min-height: 220px;
+  min-height: 300px;
 
   color: #5f5558;
 
@@ -234,6 +297,11 @@ body {
 
   white-space: pre-line;
 }
+
+
+/* =========================
+   BUTTON
+========================= */
 
 .continue-button {
   width: 100%;
@@ -260,8 +328,11 @@ body {
   pointer-events: none;
 
   transition:
-    0.4s ease;
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    background 0.3s ease;
 }
+
 
 .continue-button.show {
   opacity: 1;
@@ -272,12 +343,18 @@ body {
   pointer-events: auto;
 }
 
+
 .continue-button:hover {
   background: #b96580;
 
   transform:
     translateY(-2px);
 }
+
+
+/* =========================
+   BACKGROUND HEARTS
+========================= */
 
 .background-hearts {
   position: fixed;
@@ -291,6 +368,7 @@ body {
   z-index: -1;
 }
 
+
 .heart {
   position: absolute;
 
@@ -301,6 +379,11 @@ body {
   animation:
     floatUp linear forwards;
 }
+
+
+/* =========================
+   FINAL SCREEN
+========================= */
 
 .final-screen {
   min-height: 100vh;
@@ -320,6 +403,7 @@ body {
     fadeIn 1s ease;
 }
 
+
 .final-screen h1 {
   font-family: Georgia, serif;
 
@@ -328,7 +412,10 @@ body {
   font-weight: 500;
 
   margin-bottom: 12px;
+
+  color: #3d3035;
 }
+
 
 .final-screen p {
   color: #8a7078;
@@ -336,7 +423,13 @@ body {
   font-size: 18px;
 }
 
+
+/* =========================
+   ANIMATIONS
+========================= */
+
 @keyframes fadeIn {
+
   from {
     opacity: 0;
 
@@ -352,7 +445,9 @@ body {
   }
 }
 
+
 @keyframes floatUp {
+
   from {
     transform:
       translateY(0)
@@ -368,6 +463,11 @@ body {
   }
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (
   max-width: 520px
 ) {
@@ -376,17 +476,44 @@ body {
     justify-content:
       flex-start;
 
-    padding-top: 70px;
+    padding:
+      60px 16px
+      160px;
   }
+
 
   .hero {
     margin-bottom: 40px;
   }
 
+
+  .eyebrow {
+    font-size: 10px;
+
+    letter-spacing: 3px;
+  }
+
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+
+  .hint {
+    font-size: 15px;
+  }
+
+
   .envelope {
     width: 290px;
     height: 190px;
   }
+
 
   .flap {
     border-left-width:
@@ -399,6 +526,7 @@ body {
       105px;
   }
 
+
   .letter {
     width: 254px;
 
@@ -407,11 +535,37 @@ body {
     padding: 22px;
   }
 
+
+  .envelope.open {
+    margin-top: 70px;
+
+    margin-bottom: 340px;
+  }
+
+
   .envelope.open
   .letter {
     transform:
-      translateY(-160px);
+      translateY(-110px);
 
-    height: 420px;
+    height: 500px;
   }
+
+
+  .letter h2 {
+    font-size: 23px;
+  }
+
+
+  .message {
+    min-height: 290px;
+
+    font-size: 14px;
+  }
+
+
+  .final-screen h1 {
+    font-size: 38px;
+  }
+
 }
