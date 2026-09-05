@@ -18,9 +18,7 @@ And most importantly — keep going.
 
 
 let introOpened = false;
-
 let typingStarted = false;
-
 let countdownInterval;
 
 
@@ -89,6 +87,10 @@ function openIntroLetter() {
 }
 
 
+/* =========================
+   INTRO TYPEWRITER
+========================= */
+
 function typeIntroLetter() {
 
   if (typingStarted) {
@@ -109,6 +111,8 @@ function typeIntroLetter() {
       "continueButton"
     );
 
+
+  message.textContent = "";
 
   message.classList.add(
     "typing"
@@ -165,7 +169,7 @@ function typeIntroLetter() {
 
 
 /* =========================
-   WRITER PAGE
+   OPEN WRITER PAGE
 ========================= */
 
 function openWriter(event) {
@@ -192,16 +196,20 @@ function openWriter(event) {
     );
 
 
-  window.scrollTo(
-    0,
-    0
-  );
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 
 
   loadLetterState();
 
 }
 
+
+/* =========================
+   GO BACK
+========================= */
 
 function goBack() {
 
@@ -224,16 +232,16 @@ function goBack() {
     "flex";
 
 
-  window.scrollTo(
-    0,
-    0
-  );
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 
 }
 
 
 /* =========================
-   SAVE
+   SAVE LETTER
 ========================= */
 
 function saveLetter() {
@@ -343,7 +351,7 @@ function saveLetter() {
 
 
 /* =========================
-   LOAD STATE
+   LOAD CURRENT STATE
 ========================= */
 
 function loadLetterState() {
@@ -426,53 +434,105 @@ function loadLetterState() {
     now >= unlockDate
   ) {
 
-    readyCard.classList.add(
-      "show"
-    );
+    showReadyState();
 
   }
 
   else {
 
-    lockedCard.classList.add(
+    showLockedState(
+      unlockDate
+    );
+
+  }
+
+}
+
+
+/* =========================
+   LOCKED STATE
+========================= */
+
+function showLockedState(
+  unlockDate
+) {
+
+  const lockedCard =
+    document.getElementById(
+      "lockedCard"
+    );
+
+
+  lockedCard.classList.add(
+    "show"
+  );
+
+
+  document
+    .getElementById(
+      "unlockDate"
+    )
+    .textContent =
+    "Open on: " +
+    unlockDate.toLocaleDateString(
+      undefined,
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      }
+    );
+
+
+  updateCountdown(
+    unlockDate
+  );
+
+
+  countdownInterval =
+    setInterval(
+      () => {
+
+        updateCountdown(
+          unlockDate
+        );
+
+      },
+      1000
+    );
+
+}
+
+
+/* =========================
+   READY STATE
+========================= */
+
+function showReadyState() {
+
+  clearInterval(
+    countdownInterval
+  );
+
+
+  document
+    .getElementById(
+      "lockedCard"
+    )
+    .classList
+    .remove(
       "show"
     );
 
 
-    document
-      .getElementById(
-        "unlockDate"
-      )
-      .textContent =
-      "Open on: " +
-      unlockDate.toLocaleDateString(
-        undefined,
-        {
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        }
-      );
-
-
-    updateCountdown(
-      unlockDate
+  document
+    .getElementById(
+      "readyCard"
+    )
+    .classList
+    .add(
+      "show"
     );
-
-
-    countdownInterval =
-      setInterval(
-        () => {
-
-          updateCountdown(
-            unlockDate
-          );
-
-        },
-        1000
-      );
-
-  }
 
 }
 
@@ -498,12 +558,7 @@ function updateCountdown(
     difference <= 0
   ) {
 
-    clearInterval(
-      countdownInterval
-    );
-
-
-    loadLetterState();
+    showReadyState();
 
     return;
 
@@ -627,18 +682,76 @@ function openSavedLetter() {
     );
 
 
-  document
-    .getElementById(
-      "savedLetterContent"
-    )
-    .textContent =
-    data.text;
+  typeSavedLetter(
+    data.text
+  );
 
 }
 
 
 /* =========================
-   DELETE
+   SAVED LETTER TYPEWRITER
+========================= */
+
+function typeSavedLetter(
+  text
+) {
+
+  const container =
+    document.getElementById(
+      "savedLetterContent"
+    );
+
+
+  container.textContent = "";
+
+  container.classList.add(
+    "typing"
+  );
+
+
+  let index = 0;
+
+
+  function type() {
+
+    if (
+      index <
+      text.length
+    ) {
+
+      container.textContent +=
+        text.charAt(
+          index
+        );
+
+      index++;
+
+      setTimeout(
+        type,
+        20
+      );
+
+    }
+
+    else {
+
+      container.classList.remove(
+        "typing"
+      );
+
+    }
+
+  }
+
+
+  type();
+
+}
+
+
+/* =========================
+   DELETE LETTER
 ========================= */
 
 function deleteLetter() {
@@ -677,13 +790,21 @@ function deleteLetter() {
     "";
 
 
+  document
+    .getElementById(
+      "savedLetterContent"
+    )
+    .textContent =
+    "";
+
+
   loadLetterState();
 
 }
 
 
 /* =========================
-   HEARTS
+   FLOATING HEARTS
 ========================= */
 
 function createHeart() {
