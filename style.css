@@ -122,7 +122,7 @@ body {
 
 
 /* =========================
-   LETTER SECTION
+   INTRO LETTER
 ========================= */
 
 .letter-section {
@@ -182,12 +182,7 @@ body {
 
   box-shadow:
     0 28px 70px
-    rgba(
-      105,
-      60,
-      78,
-      0.22
-    );
+    rgba(105, 60, 78, 0.22);
 
   transition:
     transform 0.45s ease,
@@ -252,7 +247,7 @@ body {
 
 
 /* =========================
-   ENVELOPE POCKET
+   POCKET
 ========================= */
 
 .envelope-pocket {
@@ -311,7 +306,7 @@ body {
 
 
 /* =========================
-   LETTER
+   INTRO LETTER PAPER
 ========================= */
 
 .letter {
@@ -335,12 +330,7 @@ body {
 
   box-shadow:
     0 16px 40px
-    rgba(
-      70,
-      45,
-      55,
-      0.15
-    );
+    rgba(70, 45, 55, 0.15);
 
   transition:
     width 1s ease,
@@ -370,11 +360,6 @@ body {
   z-index: 10;
 }
 
-
-/* =========================
-   LETTER CONTENT
-========================= */
-
 .letter-content {
   opacity: 0;
 
@@ -393,9 +378,6 @@ body {
 
   font-size: 13px;
 
-  letter-spacing:
-    0.5px;
-
   color: #b08b96;
 }
 
@@ -405,22 +387,14 @@ body {
 
   font-family:
     Georgia,
-    "Times New Roman",
     serif;
 
   font-size: 32px;
-
-  line-height: 1.2;
 
   font-weight: 500;
 
   color: #5b4149;
 }
-
-
-/* =========================
-   MESSAGE
-========================= */
 
 .message {
   min-height: 300px;
@@ -445,11 +419,6 @@ body {
     blink 0.8s infinite;
 }
 
-
-/* =========================
-   CONTINUE BUTTON
-========================= */
-
 .continue-button {
   width: 100%;
 
@@ -460,17 +429,13 @@ body {
 
   border: none;
 
-  border-radius:
-    999px;
+  border-radius: 999px;
 
-  background:
-    #c97790;
+  background: #c97790;
 
   color: white;
 
   font-size: 15px;
-
-  font-weight: 500;
 
   cursor: pointer;
 
@@ -482,10 +447,7 @@ body {
   pointer-events: none;
 
   transition:
-    opacity 0.4s ease,
-    transform 0.4s ease,
-    background 0.3s ease,
-    box-shadow 0.3s ease;
+    0.4s ease;
 }
 
 .continue-button.show {
@@ -498,20 +460,7 @@ body {
 }
 
 .continue-button:hover {
-  background:
-    #b96580;
-
-  transform:
-    translateY(-2px);
-
-  box-shadow:
-    0 9px 22px
-    rgba(
-      185,
-      101,
-      128,
-      0.22
-    );
+  background: #b96580;
 }
 
 
@@ -548,7 +497,6 @@ body {
 
   font-family:
     Georgia,
-    "Times New Roman",
     serif;
 
   font-size:
@@ -567,10 +515,6 @@ body {
   margin:
     18px auto 40px;
 
-  max-width: 540px;
-
-  line-height: 1.7;
-
   color: #927780;
 }
 
@@ -579,10 +523,11 @@ body {
    WRITER CARD
 ========================= */
 
-.writer-card {
+.writer-card,
+.locked-card,
+.ready-card,
+.opened-saved-letter {
   padding: 42px;
-
-  text-align: left;
 
   background:
     rgba(
@@ -611,15 +556,17 @@ body {
       78,
       0.12
     );
+}
 
-  backdrop-filter:
-    blur(12px);
+.writer-card {
+  text-align: left;
 }
 
 .writer-card label {
   display: block;
 
-  margin: 0 0 9px;
+  margin:
+    0 0 9px;
 
   font-size: 14px;
 
@@ -637,16 +584,11 @@ body {
     14px 16px;
 
   border:
-    1px solid
-    #ead5dc;
+    1px solid #ead5dc;
 
   border-radius: 10px;
 
-  outline: none;
-
   background: white;
-
-  color: #55474c;
 
   font-size: 15px;
 }
@@ -656,21 +598,14 @@ body {
 
   min-height: 260px;
 
-  resize: vertical;
-
   padding: 18px;
 
   border:
-    1px solid
-    #ead5dc;
+    1px solid #ead5dc;
 
   border-radius: 12px;
 
-  outline: none;
-
-  background: white;
-
-  color: #55474c;
+  resize: vertical;
 
   font-family: inherit;
 
@@ -679,33 +614,11 @@ body {
   line-height: 1.8;
 }
 
-.writer-card input:focus,
-.writer-card textarea:focus {
-  border-color:
-    #cc899d;
-
-  box-shadow:
-    0 0 0 4px
-    rgba(
-      204,
-      137,
-      157,
-      0.12
-    );
-}
-
-
-/* =========================
-   WRITER BUTTONS
-========================= */
-
 .writer-actions {
   display: flex;
 
   justify-content:
     space-between;
-
-  align-items: center;
 
   gap: 14px;
 
@@ -713,14 +626,14 @@ body {
 }
 
 .save-button,
-.secondary-button {
+.secondary-button,
+.open-saved-button {
   padding:
     13px 22px;
 
   border: none;
 
-  border-radius:
-    999px;
+  border-radius: 999px;
 
   cursor: pointer;
 
@@ -730,32 +643,25 @@ body {
     0.3s ease;
 }
 
-.save-button {
-  background:
-    #c97790;
+.save-button,
+.open-saved-button {
+  background: #c97790;
 
   color: white;
 }
 
-.save-button:hover {
-  background:
-    #b96580;
+.save-button:hover,
+.open-saved-button:hover {
+  background: #b96580;
 
   transform:
     translateY(-2px);
 }
 
 .secondary-button {
-  background:
-    #f3e7eb;
+  background: #f3e7eb;
 
-  color:
-    #715861;
-}
-
-.secondary-button:hover {
-  background:
-    #ebd9df;
+  color: #715861;
 }
 
 .save-message {
@@ -766,121 +672,146 @@ body {
 
   text-align: center;
 
-  font-size: 14px;
-
-  color:
-    #aa667c;
+  color: #aa667c;
 }
 
 
 /* =========================
-   SAVED LETTER
+   LOCKED / READY
 ========================= */
 
-.saved-letter {
+.locked-card,
+.ready-card,
+.opened-saved-letter {
   display: none;
 
   margin-top: 35px;
 
-  padding: 35px;
-
-  text-align: left;
-
-  background:
-    rgba(
-      255,
-      253,
-      249,
-      0.8
-    );
-
-  border-radius: 18px;
-
-  box-shadow:
-    0 20px 50px
-    rgba(
-      105,
-      60,
-      78,
-      0.1
-    );
+  text-align: center;
 
   animation:
     fadeIn 0.6s ease;
 }
 
-.saved-letter.show {
+.locked-card.show,
+.ready-card.show,
+.opened-saved-letter.show {
   display: block;
 }
 
-.saved-label {
-  margin:
-    0 0 12px;
+.lock-icon,
+.ready-icon {
+  font-size: 58px;
 
-  font-size: 11px;
-
-  letter-spacing: 3px;
-
-  font-weight: 600;
-
-  color:
-    #b48392;
+  margin-bottom: 15px;
 }
 
-.saved-letter h2 {
-  margin:
-    0 0 12px;
+.saved-label {
+  font-size: 11px;
 
+  letter-spacing: 4px;
+
+  font-weight: 700;
+
+  color: #b48392;
+}
+
+.locked-card h2,
+.ready-card h2,
+.opened-saved-letter h2 {
   font-family:
     Georgia,
     serif;
 
-  font-size: 28px;
+  font-size: 34px;
 
   font-weight: 500;
 
-  color:
-    #554047;
+  color: #554047;
 }
 
-.saved-date {
-  color:
-    #aa7f8c;
+.unlock-date {
+  margin-top: 12px;
+
+  color: #a87d89;
+
+  font-size: 16px;
+}
+
+.countdown {
+  margin:
+    35px auto;
+
+  padding:
+    25px;
+
+  max-width: 420px;
+
+  background:
+    #f9edf1;
+
+  border-radius: 18px;
+}
+
+.countdown-label {
+  margin: 0 0 10px;
+
+  color: #9a7480;
 
   font-size: 14px;
 }
 
-.saved-preview {
-  margin-top: 20px;
+.countdown-time {
+  font-family:
+    Georgia,
+    serif;
 
-  line-height: 1.8;
+  font-size: 34px;
 
-  white-space:
-    pre-line;
+  color: #5d424a;
+}
 
-  color:
-    #66585d;
+.waiting-text {
+  color: #927780;
+}
+
+.open-saved-button {
+  margin-top: 24px;
+}
+
+
+/* =========================
+   OPENED SAVED LETTER
+========================= */
+
+.opened-saved-letter {
+  text-align: left;
+}
+
+.saved-letter-content {
+  margin-top: 25px;
+
+  white-space: pre-line;
+
+  line-height: 1.9;
+
+  color: #62565a;
+
+  font-size: 16px;
 }
 
 .delete-button {
-  margin-top: 15px;
-
-  padding: 0;
+  margin-top: 25px;
 
   border: none;
 
-  background:
-    transparent;
+  background: transparent;
 
-  color:
-    #b06d80;
+  color: #b06d80;
 
   cursor: pointer;
 
-  text-decoration:
-    underline;
-
-  font-size: 13px;
+  text-decoration: underline;
 }
 
 
@@ -893,9 +824,9 @@ body {
 
   inset: 0;
 
-  overflow: hidden;
-
   pointer-events: none;
+
+  overflow: hidden;
 
   z-index: -1;
 }
@@ -967,56 +898,6 @@ body {
 
 
 /* =========================
-   TABLET
-========================= */
-
-@media (
-  max-width: 720px
-) {
-
-  .page {
-    justify-content:
-      flex-start;
-
-    padding-top:
-      70px;
-  }
-
-  .letter-section.focused {
-    transform:
-      translateY(-40px);
-  }
-
-  .envelope.open {
-    margin-top: 150px;
-    margin-bottom: 430px;
-  }
-
-  .envelope.open .letter {
-    width:
-      min(
-        92vw,
-        580px
-      );
-
-    height: 640px;
-
-    padding:
-      42px 40px;
-
-    transform:
-      translateX(-50%)
-      translateY(-145px);
-  }
-
-  .writer-card {
-    padding: 32px;
-  }
-
-}
-
-
-/* =========================
    MOBILE
 ========================= */
 
@@ -1032,20 +913,6 @@ body {
 
   .hero h1 {
     font-size: 40px;
-  }
-
-  .eyebrow {
-    font-size: 10px;
-
-    letter-spacing: 3px;
-  }
-
-  .subtitle {
-    font-size: 15px;
-  }
-
-  .hint {
-    font-size: 14px;
   }
 
   .envelope {
@@ -1088,21 +955,8 @@ body {
 
   .letter {
     width: 254px;
-    height: 165px;
 
     left: 18px;
-
-    padding: 22px;
-  }
-
-  .letter-section.focused {
-    transform:
-      translateY(-10px);
-  }
-
-  .envelope.open {
-    margin-top: 140px;
-    margin-bottom: 440px;
   }
 
   .envelope.open .letter {
@@ -1120,26 +974,17 @@ body {
       translateY(-125px);
   }
 
-  .letter h2 {
-    font-size: 26px;
-  }
-
-  .message {
-    min-height: 325px;
-
-    font-size: 14px;
-
-    line-height: 1.75;
-  }
-
   .writer-page {
     padding:
       60px 15px;
   }
 
-  .writer-card {
+  .writer-card,
+  .locked-card,
+  .ready-card,
+  .opened-saved-letter {
     padding:
-      25px 20px;
+      28px 22px;
   }
 
   .writer-actions {
@@ -1149,6 +994,10 @@ body {
 
   .writer-actions button {
     width: 100%;
+  }
+
+  .countdown-time {
+    font-size: 28px;
   }
 
 }
