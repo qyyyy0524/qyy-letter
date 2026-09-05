@@ -1,3 +1,7 @@
+/* =========================
+   GLOBAL
+========================= */
+
 * {
   box-sizing: border-box;
 }
@@ -21,9 +25,9 @@ body {
   background:
     radial-gradient(
       circle at top,
-      #fff8fa,
-      #fceef2 45%,
-      #f7e5ea 100%
+      #fffafb 0%,
+      #fceef2 48%,
+      #f8e7ec 100%
     );
 
   overflow-x: hidden;
@@ -35,15 +39,14 @@ body {
 ========================= */
 
 .page {
+  width: 100%;
   min-height: 100vh;
 
   display: flex;
   flex-direction: column;
-
-  justify-content: center;
   align-items: center;
 
-  padding: 60px 20px 120px;
+  padding: 90px 20px 180px;
 }
 
 
@@ -52,45 +55,54 @@ body {
 ========================= */
 
 .hero {
+  width: 100%;
+  max-width: 1000px;
+
   text-align: center;
 
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 
   animation: fadeIn 1.2s ease;
 }
 
 .eyebrow {
+  margin: 0 0 18px;
+
   font-size: 12px;
+  font-weight: 500;
 
-  letter-spacing: 4px;
+  letter-spacing: 5px;
 
-  color: #a67c88;
-
-  margin-bottom: 15px;
+  color: #a97f8b;
 }
 
 .hero h1 {
-  font-family: Georgia, serif;
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
   font-size: clamp(
-    38px,
+    44px,
     6vw,
-    64px
+    78px
   );
+
+  line-height: 1.08;
 
   font-weight: 500;
 
-  margin: 0;
-
-  color: #3d3035;
+  color: #3f3035;
 }
 
 .subtitle {
-  margin-top: 16px;
-
-  color: #8c727b;
+  margin: 22px 0 0;
 
   font-size: 17px;
+
+  color: #927780;
 }
 
 
@@ -99,20 +111,24 @@ body {
 ========================= */
 
 .letter-section {
-  text-align: center;
-
   width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
 }
 
 .hint {
-  color: #8d6b76;
+  margin: 0 0 38px;
 
-  margin-bottom: 30px;
+  font-size: 16px;
 
-  font-size: 17px;
+  color: #987681;
 
   transition:
-    opacity 0.5s ease;
+    opacity 0.4s ease;
 }
 
 
@@ -121,64 +137,66 @@ body {
 ========================= */
 
 .envelope {
-  width: 340px;
-  height: 220px;
-
   position: relative;
 
-  margin: 0 auto;
+  width: 360px;
+  height: 230px;
 
-  background: #eab6c4;
+  background: #e9aec0;
 
-  border-radius: 8px;
+  border-radius: 10px;
 
   cursor: pointer;
 
   box-shadow:
-    0 25px 60px
-    rgba(110, 70, 85, 0.2);
+    0 25px 70px
+    rgba(106, 60, 78, 0.22);
 
   transition:
-    transform 0.35s ease,
-    margin 0.8s ease;
+    transform 0.4s ease,
+    margin 0.9s ease;
 }
 
 .envelope:hover {
-  transform:
-    translateY(-8px)
-    rotate(-1deg);
+  transform: translateY(-8px);
 }
 
 
-/* 打开后给信纸留出空间 */
+/* Open state */
 
 .envelope.open {
-  margin-top: 80px;
-  margin-bottom: 330px;
+  margin-top: 170px;
+  margin-bottom: 300px;
+
+  cursor: default;
+}
+
+.envelope.open:hover {
+  transform: none;
 }
 
 
 /* =========================
-   ENVELOPE FLAP
+   FLAP
 ========================= */
 
 .flap {
   position: absolute;
 
-  width: 0;
-  height: 0;
-
   top: 0;
   left: 0;
 
+  width: 0;
+  height: 0;
+
   border-left:
-    170px solid transparent;
+    180px solid transparent;
 
   border-right:
-    170px solid transparent;
+    180px solid transparent;
 
   border-top:
-    120px solid #d995a8;
+    125px solid #d68da4;
 
   transform-origin: top;
 
@@ -189,8 +207,7 @@ body {
 }
 
 .envelope.open .flap {
-  transform:
-    rotateX(180deg);
+  transform: rotateX(180deg);
 
   z-index: 1;
 }
@@ -203,41 +220,54 @@ body {
 .letter {
   position: absolute;
 
-  width: 300px;
-  height: 190px;
+  width: 320px;
+  height: 195px;
 
   left: 20px;
-  bottom: 15px;
+  bottom: 16px;
+
+  padding: 32px;
 
   background: #fffdf9;
 
-  border-radius: 8px;
-
-  box-shadow:
-    0 12px 35px
-    rgba(70, 45, 55, 0.15);
-
-  padding: 30px;
+  border-radius: 10px;
 
   text-align: left;
 
   overflow: hidden;
 
+  box-shadow:
+    0 12px 35px
+    rgba(70, 45, 55, 0.14);
+
   transition:
-    transform 1s ease,
-    height 1s ease;
+    width 0.9s ease,
+    height 0.9s ease,
+    left 0.9s ease,
+    transform 0.9s ease,
+    padding 0.9s ease;
 
   z-index: 2;
 }
 
 
-/* 打开后的信纸 */
+/*
+   IMPORTANT:
+   When opened the letter becomes
+   a wider card instead of a tall strip.
+*/
 
 .envelope.open .letter {
-  transform:
-    translateY(-130px);
+  width: 560px;
+  height: 500px;
 
-  height: 520px;
+  left: 50%;
+
+  padding: 45px 52px;
+
+  transform:
+    translateX(-50%)
+    translateY(-175px);
 
   overflow-y: auto;
 }
@@ -254,31 +284,36 @@ body {
     opacity 0.8s ease 0.7s;
 }
 
-.envelope.open
-.letter-content {
+.envelope.open .letter-content {
   opacity: 1;
 }
 
-
 .date {
+  margin: 0 0 12px;
+
   font-size: 13px;
 
-  color: #aa8b94;
+  letter-spacing: 0.5px;
 
-  margin-top: 0;
+  color: #b08b96;
 }
 
-
 .letter h2 {
-  font-family: Georgia, serif;
+  margin:
+    0 0 25px;
 
-  color: #5d414a;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 30px;
+
+  line-height: 1.2;
 
   font-weight: 500;
 
-  margin-top: 10px;
-
-  font-size: 26px;
+  color: #5b4149;
 }
 
 
@@ -287,13 +322,13 @@ body {
 ========================= */
 
 .message {
-  min-height: 300px;
-
-  color: #5f5558;
-
-  line-height: 1.8;
+  min-height: 280px;
 
   font-size: 15px;
+
+  line-height: 1.85;
+
+  color: #5f5558;
 
   white-space: pre-line;
 }
@@ -306,10 +341,11 @@ body {
 .continue-button {
   width: 100%;
 
+  margin-top: 20px;
+
+  padding: 14px 22px;
+
   border: none;
-
-  padding: 13px 20px;
-
   border-radius: 999px;
 
   background: #c97790;
@@ -317,22 +353,23 @@ body {
   color: white;
 
   font-size: 15px;
+  font-weight: 500;
 
   cursor: pointer;
 
   opacity: 0;
 
   transform:
-    translateY(10px);
+    translateY(12px);
 
   pointer-events: none;
 
   transition:
     opacity 0.4s ease,
     transform 0.4s ease,
-    background 0.3s ease;
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 }
-
 
 .continue-button.show {
   opacity: 1;
@@ -343,17 +380,20 @@ body {
   pointer-events: auto;
 }
 
-
 .continue-button:hover {
-  background: #b96580;
+  background: #b9647f;
 
   transform:
     translateY(-2px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(185, 100, 127, 0.22);
 }
 
 
 /* =========================
-   BACKGROUND HEARTS
+   FLOATING HEARTS
 ========================= */
 
 .background-hearts {
@@ -361,20 +401,21 @@ body {
 
   inset: 0;
 
-  pointer-events: none;
-
   overflow: hidden;
+
+  pointer-events: none;
 
   z-index: -1;
 }
-
 
 .heart {
   position: absolute;
 
   bottom: -50px;
 
-  opacity: 0.18;
+  opacity: 0.15;
+
+  color: #c78c9e;
 
   animation:
     floatUp linear forwards;
@@ -389,38 +430,51 @@ body {
   min-height: 100vh;
 
   display: flex;
-
   flex-direction: column;
 
-  align-items: center;
   justify-content: center;
+  align-items: center;
+
+  padding: 30px;
 
   text-align: center;
 
-  padding: 30px;
+  background:
+    radial-gradient(
+      circle at center,
+      #fffafb,
+      #fceef2
+    );
 
   animation:
     fadeIn 1s ease;
 }
 
-
 .final-screen h1 {
-  font-family: Georgia, serif;
+  margin: 0 0 18px;
 
-  font-size: 54px;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    40px,
+    6vw,
+    64px
+  );
 
   font-weight: 500;
 
-  margin-bottom: 12px;
-
-  color: #3d3035;
+  color: #49363c;
 }
 
-
 .final-screen p {
-  color: #8a7078;
+  margin: 0;
 
   font-size: 18px;
+
+  color: #90747d;
 }
 
 
@@ -465,27 +519,62 @@ body {
 
 
 /* =========================
+   TABLET
+========================= */
+
+@media (max-width: 700px) {
+
+  .page {
+    padding:
+      70px 18px
+      180px;
+  }
+
+  .hero {
+    margin-bottom: 55px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .envelope.open {
+    margin-top: 150px;
+    margin-bottom: 320px;
+  }
+
+  .envelope.open .letter {
+    width: 90vw;
+    max-width: 520px;
+
+    height: 500px;
+
+    padding:
+      40px 38px;
+
+    transform:
+      translateX(-50%)
+      translateY(-160px);
+  }
+
+}
+
+
+/* =========================
    MOBILE
 ========================= */
 
-@media (
-  max-width: 520px
-) {
+@media (max-width: 520px) {
 
   .page {
-    justify-content:
-      flex-start;
-
     padding:
-      60px 16px
-      160px;
+      55px 15px
+      180px;
   }
-
 
   .hero {
-    margin-bottom: 40px;
+    margin-bottom: 45px;
   }
-
 
   .eyebrow {
     font-size: 10px;
@@ -493,27 +582,27 @@ body {
     letter-spacing: 3px;
   }
 
-
   .hero h1 {
     font-size: 40px;
   }
-
 
   .subtitle {
     font-size: 15px;
   }
 
-
   .hint {
-    font-size: 15px;
+    font-size: 14px;
+
+    margin-bottom: 30px;
   }
 
+
+  /* smaller envelope */
 
   .envelope {
     width: 290px;
     height: 190px;
   }
-
 
   .flap {
     border-left-width:
@@ -526,9 +615,9 @@ body {
       105px;
   }
 
-
   .letter {
     width: 254px;
+    height: 165px;
 
     left: 18px;
 
@@ -536,36 +625,40 @@ body {
   }
 
 
-  .envelope.open {
-    margin-top: 70px;
+  /* opened mobile letter */
 
+  .envelope.open {
+    margin-top: 145px;
     margin-bottom: 340px;
   }
 
-
-  .envelope.open
-  .letter {
-    transform:
-      translateY(-110px);
+  .envelope.open .letter {
+    width: 92vw;
 
     height: 500px;
-  }
 
+    left: 50%;
+
+    padding:
+      32px 28px;
+
+    transform:
+      translateX(-50%)
+      translateY(-140px);
+  }
 
   .letter h2 {
-    font-size: 23px;
-  }
+    font-size: 26px;
 
+    margin-bottom: 20px;
+  }
 
   .message {
     min-height: 290px;
 
     font-size: 14px;
-  }
 
-
-  .final-screen h1 {
-    font-size: 38px;
+    line-height: 1.75;
   }
 
 }
