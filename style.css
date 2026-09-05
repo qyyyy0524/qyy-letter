@@ -1,7 +1,3 @@
-/* =========================
-   GLOBAL
-========================= */
-
 * {
   box-sizing: border-box;
 }
@@ -12,7 +8,6 @@ html {
 
 body {
   margin: 0;
-
   min-height: 100vh;
 
   font-family:
@@ -36,7 +31,7 @@ body {
 
 
 /* =========================
-   LANDING PAGE
+   LANDING
 ========================= */
 
 .page {
@@ -50,7 +45,7 @@ body {
 
   padding:
     70px 20px
-    120px;
+    180px;
 }
 
 
@@ -60,7 +55,6 @@ body {
 
 .hero {
   width: 100%;
-
   max-width: 1100px;
 
   text-align: center;
@@ -73,7 +67,6 @@ body {
     filter 0.8s ease;
 }
 
-
 .hero.fade-away {
   opacity: 0;
 
@@ -81,26 +74,21 @@ body {
     translateY(-30px)
     scale(0.96);
 
-  filter:
-    blur(5px);
+  filter: blur(5px);
 
   pointer-events: none;
 }
 
-
 .eyebrow {
-  margin:
-    0 0 18px;
+  margin: 0 0 18px;
 
   font-size: 12px;
-
   font-weight: 600;
 
   letter-spacing: 5px;
 
   color: #aa808d;
 }
-
 
 .hero h1 {
   margin: 0;
@@ -124,10 +112,8 @@ body {
   color: #403136;
 }
 
-
 .subtitle {
-  margin:
-    22px 0 0;
+  margin: 22px 0 0;
 
   font-size: 17px;
 
@@ -136,7 +122,7 @@ body {
 
 
 /* =========================
-   LETTER AREA
+   LETTER SECTION
 ========================= */
 
 .letter-section {
@@ -153,16 +139,13 @@ body {
     transform 0.9s ease;
 }
 
-
 .letter-section.focused {
   transform:
-    translateY(-100px);
+    translateY(-70px);
 }
 
-
 .hint {
-  margin:
-    0 0 36px;
+  margin: 0 0 36px;
 
   color: #987681;
 
@@ -172,7 +155,6 @@ body {
     opacity 0.5s ease,
     transform 0.5s ease;
 }
-
 
 .hint.hide {
   opacity: 0;
@@ -208,22 +190,23 @@ body {
     );
 
   transition:
-    transform 0.45s ease;
+    transform 0.45s ease,
+    margin 0.8s ease;
 }
-
 
 .envelope:hover {
   transform:
     translateY(-8px);
 }
 
-
 .envelope.open {
   cursor: default;
 
+  margin-top: 180px;
+  margin-bottom: 430px;
+
   transform: none;
 }
-
 
 .envelope.open:hover {
   transform: none;
@@ -260,7 +243,6 @@ body {
   z-index: 5;
 }
 
-
 .envelope.open .flap {
   transform:
     rotateX(180deg);
@@ -285,7 +267,6 @@ body {
   z-index: 3;
 }
 
-
 .envelope-pocket::before {
   content: "";
 
@@ -306,7 +287,6 @@ body {
   border-bottom:
     115px solid transparent;
 }
-
 
 .envelope-pocket::after {
   content: "";
@@ -345,8 +325,7 @@ body {
 
   padding: 34px;
 
-  background:
-    #fffdf9;
+  background: #fffdf9;
 
   border-radius: 12px;
 
@@ -373,12 +352,9 @@ body {
   z-index: 2;
 }
 
-
-/* Opened letter */
-
 .envelope.open .letter {
   width: 620px;
-  height: 570px;
+  height: 650px;
 
   left: 50%;
 
@@ -387,7 +363,7 @@ body {
 
   transform:
     translateX(-50%)
-    translateY(-185px);
+    translateY(-155px);
 
   overflow-y: auto;
 
@@ -407,16 +383,13 @@ body {
     0.65s;
 }
 
-
 .envelope.open
 .letter-content {
   opacity: 1;
 }
 
-
 .date {
-  margin:
-    0 0 12px;
+  margin: 0 0 12px;
 
   font-size: 13px;
 
@@ -425,7 +398,6 @@ body {
 
   color: #b08b96;
 }
-
 
 .letter h2 {
   margin:
@@ -447,11 +419,11 @@ body {
 
 
 /* =========================
-   TYPEWRITER MESSAGE
+   MESSAGE
 ========================= */
 
 .message {
-  min-height: 320px;
+  min-height: 300px;
 
   font-size: 15px;
 
@@ -461,9 +433,6 @@ body {
 
   white-space: pre-line;
 }
-
-
-/* Blinking cursor */
 
 .message.typing::after {
   content: "|";
@@ -484,10 +453,10 @@ body {
 .continue-button {
   width: 100%;
 
-  margin-top: 18px;
+  margin-top: 24px;
 
   padding:
-    14px 22px;
+    15px 22px;
 
   border: none;
 
@@ -519,7 +488,6 @@ body {
     box-shadow 0.3s ease;
 }
 
-
 .continue-button.show {
   opacity: 1;
 
@@ -528,7 +496,6 @@ body {
 
   pointer-events: auto;
 }
-
 
 .continue-button:hover {
   background:
@@ -556,7 +523,6 @@ body {
   display: none;
 }
 
-
 .writer-page {
   min-height: 100vh;
 
@@ -566,7 +532,6 @@ body {
   animation:
     fadeIn 0.8s ease;
 }
-
 
 .writer-container {
   width: 100%;
@@ -578,10 +543,8 @@ body {
   text-align: center;
 }
 
-
 .writer-container > h1 {
-  margin:
-    0;
+  margin: 0;
 
   font-family:
     Georgia,
@@ -600,7 +563,6 @@ body {
   color: #423237;
 }
 
-
 .writer-subtitle {
   margin:
     18px auto 40px;
@@ -618,8 +580,7 @@ body {
 ========================= */
 
 .writer-card {
-  padding:
-    42px;
+  padding: 42px;
 
   text-align: left;
 
@@ -640,8 +601,7 @@ body {
       0.18
     );
 
-  border-radius:
-    20px;
+  border-radius: 20px;
 
   box-shadow:
     0 25px 65px
@@ -656,12 +616,10 @@ body {
     blur(12px);
 }
 
-
 .writer-card label {
   display: block;
 
-  margin:
-    0 0 9px;
+  margin: 0 0 9px;
 
   font-size: 14px;
 
@@ -670,12 +628,10 @@ body {
   color: #654d55;
 }
 
-
 .writer-card input {
   width: 100%;
 
-  margin-bottom:
-    28px;
+  margin-bottom: 28px;
 
   padding:
     14px 16px;
@@ -684,23 +640,16 @@ body {
     1px solid
     #ead5dc;
 
-  border-radius:
-    10px;
+  border-radius: 10px;
 
   outline: none;
 
-  background:
-    white;
+  background: white;
 
   color: #55474c;
 
   font-size: 15px;
-
-  transition:
-    border 0.2s ease,
-    box-shadow 0.2s ease;
 }
-
 
 .writer-card textarea {
   width: 100%;
@@ -709,20 +658,17 @@ body {
 
   resize: vertical;
 
-  padding:
-    18px;
+  padding: 18px;
 
   border:
     1px solid
     #ead5dc;
 
-  border-radius:
-    12px;
+  border-radius: 12px;
 
   outline: none;
 
-  background:
-    white;
+  background: white;
 
   color: #55474c;
 
@@ -731,12 +677,7 @@ body {
   font-size: 15px;
 
   line-height: 1.8;
-
-  transition:
-    border 0.2s ease,
-    box-shadow 0.2s ease;
 }
-
 
 .writer-card input:focus,
 .writer-card textarea:focus {
@@ -771,7 +712,6 @@ body {
   margin-top: 25px;
 }
 
-
 .save-button,
 .secondary-button {
   padding:
@@ -790,14 +730,12 @@ body {
     0.3s ease;
 }
 
-
 .save-button {
   background:
     #c97790;
 
   color: white;
 }
-
 
 .save-button:hover {
   background:
@@ -807,7 +745,6 @@ body {
     translateY(-2px);
 }
 
-
 .secondary-button {
   background:
     #f3e7eb;
@@ -816,16 +753,13 @@ body {
     #715861;
 }
 
-
 .secondary-button:hover {
   background:
     #ebd9df;
 }
 
-
 .save-message {
-  min-height:
-    22px;
+  min-height: 22px;
 
   margin:
     20px 0 0;
@@ -846,11 +780,9 @@ body {
 .saved-letter {
   display: none;
 
-  margin-top:
-    35px;
+  margin-top: 35px;
 
-  padding:
-    35px;
+  padding: 35px;
 
   text-align: left;
 
@@ -862,8 +794,7 @@ body {
       0.8
     );
 
-  border-radius:
-    18px;
+  border-radius: 18px;
 
   box-shadow:
     0 20px 50px
@@ -878,11 +809,9 @@ body {
     fadeIn 0.6s ease;
 }
 
-
 .saved-letter.show {
   display: block;
 }
-
 
 .saved-label {
   margin:
@@ -897,7 +826,6 @@ body {
   color:
     #b48392;
 }
-
 
 .saved-letter h2 {
   margin:
@@ -915,7 +843,6 @@ body {
     #554047;
 }
 
-
 .saved-date {
   color:
     #aa7f8c;
@@ -923,13 +850,10 @@ body {
   font-size: 14px;
 }
 
-
 .saved-preview {
-  margin-top:
-    20px;
+  margin-top: 20px;
 
-  line-height:
-    1.8;
+  line-height: 1.8;
 
   white-space:
     pre-line;
@@ -938,10 +862,8 @@ body {
     #66585d;
 }
 
-
 .delete-button {
-  margin-top:
-    15px;
+  margin-top: 15px;
 
   padding: 0;
 
@@ -963,7 +885,7 @@ body {
 
 
 /* =========================
-   BACKGROUND HEARTS
+   HEARTS
 ========================= */
 
 .background-hearts {
@@ -977,7 +899,6 @@ body {
 
   z-index: -1;
 }
-
 
 .heart {
   position: absolute;
@@ -1014,7 +935,6 @@ body {
   }
 }
 
-
 @keyframes blink {
 
   0%,
@@ -1027,7 +947,6 @@ body {
     opacity: 0;
   }
 }
-
 
 @keyframes floatUp {
 
@@ -1063,18 +982,15 @@ body {
       70px;
   }
 
-
-  .hero {
-    margin-bottom:
-      55px;
-  }
-
-
   .letter-section.focused {
     transform:
-      translateY(-70px);
+      translateY(-40px);
   }
 
+  .envelope.open {
+    margin-top: 150px;
+    margin-bottom: 430px;
+  }
 
   .envelope.open .letter {
     width:
@@ -1083,21 +999,18 @@ body {
         580px
       );
 
-    height:
-      560px;
+    height: 640px;
 
     padding:
       42px 40px;
 
     transform:
       translateX(-50%)
-      translateY(-170px);
+      translateY(-145px);
   }
 
-
   .writer-card {
-    padding:
-      32px;
+    padding: 32px;
   }
 
 }
@@ -1114,45 +1027,31 @@ body {
   .page {
     padding:
       55px 15px
-      160px;
+      170px;
   }
-
 
   .hero h1 {
-    font-size:
-      40px;
+    font-size: 40px;
   }
-
 
   .eyebrow {
-    font-size:
-      10px;
+    font-size: 10px;
 
-    letter-spacing:
-      3px;
+    letter-spacing: 3px;
   }
-
 
   .subtitle {
-    font-size:
-      15px;
+    font-size: 15px;
   }
-
 
   .hint {
-    font-size:
-      14px;
+    font-size: 14px;
   }
-
 
   .envelope {
-    width:
-      290px;
-
-    height:
-      190px;
+    width: 290px;
+    height: 190px;
   }
-
 
   .flap {
     border-left-width:
@@ -1165,7 +1064,6 @@ body {
       105px;
   }
 
-
   .envelope-pocket::before {
     border-left-width:
       145px;
@@ -1176,7 +1074,6 @@ body {
     border-bottom-width:
       95px;
   }
-
 
   .envelope-pocket::after {
     border-right-width:
@@ -1189,86 +1086,69 @@ body {
       95px;
   }
 
-
   .letter {
-    width:
-      254px;
+    width: 254px;
+    height: 165px;
 
-    height:
-      165px;
+    left: 18px;
 
-    left:
-      18px;
-
-    padding:
-      22px;
+    padding: 22px;
   }
-
 
   .letter-section.focused {
     transform:
-      translateY(-30px);
+      translateY(-10px);
   }
 
+  .envelope.open {
+    margin-top: 140px;
+    margin-bottom: 440px;
+  }
 
   .envelope.open .letter {
-    width:
-      92vw;
+    width: 92vw;
 
-    height:
-      540px;
+    height: 620px;
 
-    left:
-      50%;
+    left: 50%;
 
     padding:
       32px 27px;
 
     transform:
       translateX(-50%)
-      translateY(-145px);
+      translateY(-125px);
   }
-
 
   .letter h2 {
-    font-size:
-      26px;
+    font-size: 26px;
   }
-
 
   .message {
-    min-height:
-      320px;
+    min-height: 325px;
 
-    font-size:
-      14px;
+    font-size: 14px;
 
-    line-height:
-      1.75;
+    line-height: 1.75;
   }
-
 
   .writer-page {
     padding:
       60px 15px;
   }
 
-
   .writer-card {
     padding:
       25px 20px;
   }
-
 
   .writer-actions {
     flex-direction:
       column-reverse;
   }
 
-
   .writer-actions button {
-    width:
-      100%;
+    width: 100%;
   }
 
 }
