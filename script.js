@@ -1,7 +1,3 @@
-/* =========================
-   LETTER CONTENT
-========================= */
-
 const letterText =
 `If you're reading this, some time has passed since I built this little project.
 
@@ -22,7 +18,6 @@ And most importantly — keep going.
 
 
 let opened = false;
-
 let typingStarted = false;
 
 
@@ -44,18 +39,15 @@ function openLetter() {
       "envelope"
     );
 
-
   const hero =
     document.getElementById(
       "hero"
     );
 
-
   const hint =
     document.getElementById(
       "hint"
     );
-
 
   const letterSection =
     document.getElementById(
@@ -67,16 +59,10 @@ function openLetter() {
     "open"
   );
 
-
   hint.classList.add(
     "hide"
   );
 
-
-  /*
-    Fade the large title away
-    after envelope starts opening
-  */
 
   setTimeout(() => {
 
@@ -84,18 +70,12 @@ function openLetter() {
       "fade-away"
     );
 
-
     letterSection.classList.add(
       "focused"
     );
 
   }, 450);
 
-
-  /*
-    Start typewriter after
-    opening animation finishes
-  */
 
   setTimeout(() => {
 
@@ -125,7 +105,6 @@ function typeLetter() {
       "message"
     );
 
-
   const button =
     document.getElementById(
       "continueButton"
@@ -141,7 +120,7 @@ function typeLetter() {
 
   let index = 0;
 
-  const speed = 22;
+  const speed = 18;
 
 
   function type() {
@@ -156,9 +135,7 @@ function typeLetter() {
           index
         );
 
-
       index++;
-
 
       setTimeout(
         type,
@@ -173,10 +150,24 @@ function typeLetter() {
         "typing"
       );
 
-
       button.classList.add(
         "show"
       );
+
+
+      /*
+        Scroll to the button
+        so it is always visible
+      */
+
+      setTimeout(() => {
+
+        button.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest"
+        });
+
+      }, 200);
 
     }
 
@@ -189,7 +180,7 @@ function typeLetter() {
 
 
 /* =========================
-   GO TO WRITER
+   OPEN WRITER PAGE
 ========================= */
 
 function finishLetter(event) {
@@ -201,7 +192,6 @@ function finishLetter(event) {
     document.getElementById(
       "landingPage"
     );
-
 
   const writerPage =
     document.getElementById(
@@ -230,7 +220,7 @@ function finishLetter(event) {
 
 
 /* =========================
-   BACK
+   GO BACK
 ========================= */
 
 function goBack() {
@@ -239,7 +229,6 @@ function goBack() {
     document.getElementById(
       "landingPage"
     );
-
 
   const writerPage =
     document.getElementById(
@@ -423,14 +412,14 @@ function loadSavedLetter() {
       data.openDate +
       "T00:00:00"
     )
-    .toLocaleDateString(
-      undefined,
-      {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      }
-    );
+      .toLocaleDateString(
+        undefined,
+        {
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        }
+      );
 
 
   savedDate.textContent =
@@ -508,8 +497,7 @@ function createHeart() {
   );
 
 
-  heart.textContent =
-    "♡";
+  heart.textContent = "♡";
 
 
   heart.style.left =
@@ -546,8 +534,6 @@ function createHeart() {
 }
 
 
-/* Create hearts */
-
 setInterval(
   createHeart,
   950
@@ -555,17 +541,12 @@ setInterval(
 
 
 /* =========================
-   INITIAL SETUP
+   DATE SETUP
 ========================= */
 
 window.addEventListener(
   "DOMContentLoaded",
   () => {
-
-    /*
-      Prevent selecting dates
-      before tomorrow
-    */
 
     const dateInput =
       document.getElementById(
@@ -582,14 +563,32 @@ window.addEventListener(
     );
 
 
-    const minimumDate =
-      tomorrow
-        .toISOString()
-        .split("T")[0];
+    const year =
+      tomorrow.getFullYear();
+
+
+    const month =
+      String(
+        tomorrow.getMonth() + 1
+      )
+        .padStart(
+          2,
+          "0"
+        );
+
+
+    const day =
+      String(
+        tomorrow.getDate()
+      )
+        .padStart(
+          2,
+          "0"
+        );
 
 
     dateInput.min =
-      minimumDate;
+      `${year}-${month}-${day}`;
 
   }
 );
