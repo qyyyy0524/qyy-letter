@@ -2,20 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Future Letter</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 </head>
 
 <body>
 
-  <div class="background-hearts" id="backgroundHearts"></div>
+  <!-- Floating background hearts -->
+  <div
+    class="background-hearts"
+    id="backgroundHearts"
+  ></div>
 
-  <main class="page">
 
-    <section class="hero">
+  <!-- =========================
+       LANDING PAGE
+  ========================== -->
+
+  <main
+    class="page"
+    id="landingPage"
+  >
+
+    <section
+      class="hero"
+      id="hero"
+    >
 
       <p class="eyebrow">
         A MESSAGE FROM THE PAST
@@ -32,10 +54,16 @@
     </section>
 
 
-    <section class="letter-section">
+    <section
+      class="letter-section"
+      id="letterSection"
+    >
 
-      <p class="hint" id="hint">
-        💌 You received a letter. Click the envelope to open it.
+      <p
+        class="hint"
+        id="hint"
+      >
+        💌 A letter from your past is waiting.
       </p>
 
 
@@ -47,8 +75,13 @@
 
         <div class="flap"></div>
 
+        <div class="envelope-pocket"></div>
 
-        <div class="letter">
+
+        <article
+          class="letter"
+          id="letter"
+        >
 
           <div class="letter-content">
 
@@ -76,13 +109,128 @@
 
           </div>
 
-        </div>
+        </article>
 
       </div>
 
     </section>
 
   </main>
+
+
+  <!-- =========================
+       WRITE YOUR OWN LETTER
+  ========================== -->
+
+  <section
+    class="writer-page hidden-page"
+    id="writerPage"
+  >
+
+    <div class="writer-container">
+
+      <p class="eyebrow">
+        YOUR TURN
+      </p>
+
+      <h1>
+        Write to Your Future Self
+      </h1>
+
+      <p class="writer-subtitle">
+        Write something you want your future self to remember.
+      </p>
+
+
+      <div class="writer-card">
+
+        <label for="futureDate">
+          Open this letter on
+        </label>
+
+        <input
+          type="date"
+          id="futureDate"
+        >
+
+
+        <label for="letterInput">
+          Your letter
+        </label>
+
+        <textarea
+          id="letterInput"
+          placeholder="Dear Future Me,
+
+There is something I want you to remember..."
+        ></textarea>
+
+
+        <div class="writer-actions">
+
+          <button
+            class="secondary-button"
+            onclick="goBack()"
+          >
+            ← Back
+          </button>
+
+
+          <button
+            class="save-button"
+            onclick="saveLetter()"
+          >
+            Save My Letter ✨
+          </button>
+
+        </div>
+
+
+        <p
+          class="save-message"
+          id="saveMessage"
+        ></p>
+
+      </div>
+
+
+      <!-- Saved letter preview -->
+
+      <div
+        class="saved-letter"
+        id="savedLetter"
+      >
+
+        <p class="saved-label">
+          SAVED LETTER
+        </p>
+
+        <h2>
+          Your letter is waiting.
+        </h2>
+
+        <p
+          class="saved-date"
+          id="savedDate"
+        ></p>
+
+        <p
+          class="saved-preview"
+          id="savedPreview"
+        ></p>
+
+        <button
+          class="delete-button"
+          onclick="deleteLetter()"
+        >
+          Delete saved letter
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
 
 
   <script src="script.js"></script>
