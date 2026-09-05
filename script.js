@@ -1,4 +1,4 @@
-const letterText =
+const introLetterText =
 `If you're reading this, some time has passed since I built this little project.
 
 I hope you're still curious.
@@ -17,21 +17,24 @@ And most importantly — keep going.
 — From your past self`;
 
 
-let opened = false;
+let introOpened = false;
+
 let typingStarted = false;
+
+let countdownInterval;
 
 
 /* =========================
-   OPEN LETTER
+   INTRO LETTER
 ========================= */
 
-function openLetter() {
+function openIntroLetter() {
 
-  if (opened) {
+  if (introOpened) {
     return;
   }
 
-  opened = true;
+  introOpened = true;
 
 
   const envelope =
@@ -49,7 +52,7 @@ function openLetter() {
       "hint"
     );
 
-  const letterSection =
+  const section =
     document.getElementById(
       "letterSection"
     );
@@ -70,7 +73,7 @@ function openLetter() {
       "fade-away"
     );
 
-    letterSection.classList.add(
+    section.classList.add(
       "focused"
     );
 
@@ -79,18 +82,14 @@ function openLetter() {
 
   setTimeout(() => {
 
-    typeLetter();
+    typeIntroLetter();
 
   }, 1300);
 
 }
 
 
-/* =========================
-   TYPEWRITER
-========================= */
-
-function typeLetter() {
+function typeIntroLetter() {
 
   if (typingStarted) {
     return;
@@ -102,7 +101,7 @@ function typeLetter() {
 
   const message =
     document.getElementById(
-      "message"
+      "introMessage"
     );
 
   const button =
@@ -111,8 +110,6 @@ function typeLetter() {
     );
 
 
-  message.textContent = "";
-
   message.classList.add(
     "typing"
   );
@@ -120,18 +117,16 @@ function typeLetter() {
 
   let index = 0;
 
-  const speed = 18;
-
 
   function type() {
 
     if (
       index <
-      letterText.length
+      introLetterText.length
     ) {
 
       message.textContent +=
-        letterText.charAt(
+        introLetterText.charAt(
           index
         );
 
@@ -139,7 +134,7 @@ function typeLetter() {
 
       setTimeout(
         type,
-        speed
+        18
       );
 
     }
@@ -154,20 +149,10 @@ function typeLetter() {
         "show"
       );
 
-
-      /*
-        Scroll to the button
-        so it is always visible
-      */
-
-      setTimeout(() => {
-
-        button.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest"
-        });
-
-      }, 200);
+      button.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
 
     }
 
@@ -180,81 +165,75 @@ function typeLetter() {
 
 
 /* =========================
-   OPEN WRITER PAGE
+   WRITER PAGE
 ========================= */
 
-function finishLetter(event) {
+function openWriter(event) {
 
   event.stopPropagation();
 
 
-  const landingPage =
-    document.getElementById(
+  document
+    .getElementById(
       "landingPage"
-    );
-
-  const writerPage =
-    document.getElementById(
-      "writerPage"
-    );
-
-
-  landingPage.style.display =
+    )
+    .style
+    .display =
     "none";
 
 
-  writerPage.classList.remove(
-    "hidden-page"
+  document
+    .getElementById(
+      "writerPage"
+    )
+    .classList
+    .remove(
+      "hidden-page"
+    );
+
+
+  window.scrollTo(
+    0,
+    0
   );
 
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-
-  loadSavedLetter();
+  loadLetterState();
 
 }
 
-
-/* =========================
-   GO BACK
-========================= */
 
 function goBack() {
 
-  const landingPage =
-    document.getElementById(
-      "landingPage"
-    );
-
-  const writerPage =
-    document.getElementById(
+  document
+    .getElementById(
       "writerPage"
+    )
+    .classList
+    .add(
+      "hidden-page"
     );
 
 
-  writerPage.classList.add(
-    "hidden-page"
-  );
-
-
-  landingPage.style.display =
+  document
+    .getElementById(
+      "landingPage"
+    )
+    .style
+    .display =
     "flex";
 
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  window.scrollTo(
+    0,
+    0
+  );
 
 }
 
 
 /* =========================
-   SAVE LETTER
+   SAVE
 ========================= */
 
 function saveLetter() {
@@ -285,7 +264,7 @@ function saveLetter() {
   if (!text) {
 
     message.textContent =
-      "Please write something before saving your letter.";
+      "Please write something before sealing your letter.";
 
     return;
 
@@ -302,9 +281,10 @@ function saveLetter() {
   }
 
 
-  const selectedDate =
+  const openDate =
     new Date(
-      date + "T00:00:00"
+      date +
+      "T00:00:00"
     );
 
 
@@ -321,7 +301,7 @@ function saveLetter() {
 
 
   if (
-    selectedDate <= today
+    openDate <= today
   ) {
 
     message.textContent =
@@ -332,7 +312,7 @@ function saveLetter() {
   }
 
 
-  const savedLetter = {
+  const data = {
 
     text: text,
 
@@ -348,25 +328,30 @@ function saveLetter() {
   localStorage.setItem(
     "futureLetter",
     JSON.stringify(
-      savedLetter
+      data
     )
   );
 
 
   message.textContent =
-    "✨ Your letter has been saved.";
+    "🔒 Your letter has been sealed.";
 
 
-  loadSavedLetter();
+  loadLetterState();
 
 }
 
 
 /* =========================
-   LOAD SAVED LETTER
+   LOAD STATE
 ========================= */
 
-function loadSavedLetter() {
+function loadLetterState() {
+
+  clearInterval(
+    countdownInterval
+  );
+
 
   const saved =
     localStorage.getItem(
@@ -374,45 +359,93 @@ function loadSavedLetter() {
     );
 
 
-  const card =
+  const writerCard =
     document.getElementById(
-      "savedLetter"
+      "writerCard"
     );
+
+  const lockedCard =
+    document.getElementById(
+      "lockedCard"
+    );
+
+  const readyCard =
+    document.getElementById(
+      "readyCard"
+    );
+
+  const openedCard =
+    document.getElementById(
+      "openedSavedLetter"
+    );
+
+
+  lockedCard.classList.remove(
+    "show"
+  );
+
+  readyCard.classList.remove(
+    "show"
+  );
+
+  openedCard.classList.remove(
+    "show"
+  );
 
 
   if (!saved) {
 
-    card.classList.remove(
-      "show"
-    );
+    writerCard.style.display =
+      "block";
 
     return;
 
   }
 
 
+  writerCard.style.display =
+    "none";
+
+
   const data =
     JSON.parse(saved);
 
 
-  const savedDate =
-    document.getElementById(
-      "savedDate"
-    );
-
-
-  const savedPreview =
-    document.getElementById(
-      "savedPreview"
-    );
-
-
-  const formattedDate =
+  const unlockDate =
     new Date(
       data.openDate +
       "T00:00:00"
-    )
-      .toLocaleDateString(
+    );
+
+
+  const now =
+    new Date();
+
+
+  if (
+    now >= unlockDate
+  ) {
+
+    readyCard.classList.add(
+      "show"
+    );
+
+  }
+
+  else {
+
+    lockedCard.classList.add(
+      "show"
+    );
+
+
+    document
+      .getElementById(
+        "unlockDate"
+      )
+      .textContent =
+      "Open on: " +
+      unlockDate.toLocaleDateString(
         undefined,
         {
           year: "numeric",
@@ -422,36 +455,161 @@ function loadSavedLetter() {
       );
 
 
-  savedDate.textContent =
-    "Open on: " +
-    formattedDate;
+    updateCountdown(
+      unlockDate
+    );
 
 
-  savedPreview.textContent =
-    data.text;
+    countdownInterval =
+      setInterval(
+        () => {
 
+          updateCountdown(
+            unlockDate
+          );
 
-  card.classList.add(
-    "show"
-  );
+        },
+        1000
+      );
+
+  }
 
 }
 
 
 /* =========================
-   DELETE LETTER
+   COUNTDOWN
 ========================= */
 
-function deleteLetter() {
+function updateCountdown(
+  unlockDate
+) {
 
-  localStorage.removeItem(
-    "futureLetter"
-  );
+  const now =
+    new Date();
+
+
+  const difference =
+    unlockDate -
+    now;
+
+
+  if (
+    difference <= 0
+  ) {
+
+    clearInterval(
+      countdownInterval
+    );
+
+
+    loadLetterState();
+
+    return;
+
+  }
+
+
+  const days =
+    Math.floor(
+      difference /
+      (
+        1000 *
+        60 *
+        60 *
+        24
+      )
+    );
+
+
+  const hours =
+    Math.floor(
+      (
+        difference /
+        (
+          1000 *
+          60 *
+          60
+        )
+      ) %
+      24
+    );
+
+
+  const minutes =
+    Math.floor(
+      (
+        difference /
+        (
+          1000 *
+          60
+        )
+      ) %
+      60
+    );
+
+
+  const seconds =
+    Math.floor(
+      (
+        difference /
+        1000
+      ) %
+      60
+    );
 
 
   document
     .getElementById(
-      "savedLetter"
+      "countdownTime"
+    )
+    .textContent =
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+}
+
+
+/* =========================
+   OPEN SAVED LETTER
+========================= */
+
+function openSavedLetter() {
+
+  const saved =
+    localStorage.getItem(
+      "futureLetter"
+    );
+
+
+  if (!saved) {
+    return;
+  }
+
+
+  const data =
+    JSON.parse(saved);
+
+
+  const unlockDate =
+    new Date(
+      data.openDate +
+      "T00:00:00"
+    );
+
+
+  if (
+    new Date() <
+    unlockDate
+  ) {
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      "readyCard"
     )
     .classList
     .remove(
@@ -461,16 +619,71 @@ function deleteLetter() {
 
   document
     .getElementById(
-      "saveMessage"
+      "openedSavedLetter"
+    )
+    .classList
+    .add(
+      "show"
+    );
+
+
+  document
+    .getElementById(
+      "savedLetterContent"
     )
     .textContent =
-    "Saved letter deleted.";
+    data.text;
 
 }
 
 
 /* =========================
-   BACKGROUND HEARTS
+   DELETE
+========================= */
+
+function deleteLetter() {
+
+  localStorage.removeItem(
+    "futureLetter"
+  );
+
+
+  clearInterval(
+    countdownInterval
+  );
+
+
+  document
+    .getElementById(
+      "letterInput"
+    )
+    .value =
+    "";
+
+
+  document
+    .getElementById(
+      "futureDate"
+    )
+    .value =
+    "";
+
+
+  document
+    .getElementById(
+      "saveMessage"
+    )
+    .textContent =
+    "";
+
+
+  loadLetterState();
+
+}
+
+
+/* =========================
+   HEARTS
 ========================= */
 
 function createHeart() {
@@ -497,7 +710,8 @@ function createHeart() {
   );
 
 
-  heart.textContent = "♡";
+  heart.textContent =
+    "♡";
 
 
   heart.style.left =
@@ -541,14 +755,14 @@ setInterval(
 
 
 /* =========================
-   DATE SETUP
+   STARTUP
 ========================= */
 
 window.addEventListener(
   "DOMContentLoaded",
   () => {
 
-    const dateInput =
+    const input =
       document.getElementById(
         "futureDate"
       );
@@ -571,23 +785,23 @@ window.addEventListener(
       String(
         tomorrow.getMonth() + 1
       )
-        .padStart(
-          2,
-          "0"
-        );
+      .padStart(
+        2,
+        "0"
+      );
 
 
     const day =
       String(
         tomorrow.getDate()
       )
-        .padStart(
-          2,
-          "0"
-        );
+      .padStart(
+        2,
+        "0"
+      );
 
 
-    dateInput.min =
+    input.min =
       `${year}-${month}-${day}`;
 
   }
