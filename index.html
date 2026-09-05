@@ -1,273 +1,77 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>一封信</title>
+  <title>Future Letter</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      font-family: "Microsoft YaHei", sans-serif;
-
-      background:
-        linear-gradient(
-          135deg,
-          #fff1f5,
-          #ffe4ec,
-          #fff8f0
-        );
-
-      overflow: hidden;
-    }
-
-    .container {
-      text-align: center;
-    }
-
-    .hint {
-      margin-bottom: 30px;
-      color: #8a5a66;
-      font-size: 18px;
-    }
-
-    .envelope {
-      position: relative;
-
-      width: 320px;
-      height: 210px;
-
-      background: #f7b5c5;
-
-      border-radius: 8px;
-
-      cursor: pointer;
-
-      box-shadow:
-        0 20px 50px rgba(100, 50, 70, 0.2);
-
-      transition:
-        transform 0.3s ease;
-    }
-
-    .envelope:hover {
-      transform: translateY(-8px);
-    }
-
-    .envelope::before {
-      content: "";
-
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      border-left: 160px solid transparent;
-      border-right: 160px solid transparent;
-      border-top: 110px solid #ee91aa;
-
-      transform-origin: top;
-
-      transition:
-        transform 0.8s ease;
-
-      z-index: 3;
-    }
-
-    .envelope.open::before {
-      transform: rotateX(180deg);
-
-      z-index: 0;
-    }
-
-    .letter {
-      position: absolute;
-
-      width: 280px;
-      height: 190px;
-
-      left: 20px;
-      bottom: 10px;
-
-      background: white;
-
-      border-radius: 10px;
-
-      padding: 25px;
-
-      text-align: left;
-
-      box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.15);
-
-      transform: translateY(0);
-
-      transition:
-        transform 1s ease,
-        height 1s ease;
-
-      z-index: 1;
-
-      overflow: hidden;
-    }
-
-    .envelope.open .letter {
-      transform: translateY(-150px);
-
-      height: 350px;
-    }
-
-    .letter h2 {
-      color: #e05b7d;
-
-      margin-top: 0;
-    }
-
-    .letter p {
-      color: #555;
-
-      line-height: 1.8;
-    }
-
-    .buttons {
-      margin-top: 25px;
-
-      display: flex;
-
-      gap: 15px;
-
-      justify-content: center;
-    }
-
-    button {
-      border: none;
-
-      padding: 10px 20px;
-
-      border-radius: 20px;
-
-      font-size: 15px;
-
-      cursor: pointer;
-
-      transition: 0.3s;
-    }
-
-    .accept {
-      background: #e85f82;
-
-      color: white;
-    }
-
-    .accept:hover {
-      transform: scale(1.08);
-
-      background: #d94d70;
-    }
-
-    .reject {
-      background: #eee;
-
-      color: #555;
-    }
-
-    .hidden {
-      opacity: 0;
-
-      pointer-events: none;
-    }
-
-    .letter-content {
-      opacity: 0;
-
-      transition:
-        opacity 1s ease 0.6s;
-    }
-
-    .envelope.open .letter-content {
-      opacity: 1;
-    }
-
-    @media (max-width: 500px) {
-      .envelope {
-        width: 280px;
-        height: 190px;
-      }
-
-      .envelope::before {
-        border-left-width: 140px;
-        border-right-width: 140px;
-      }
-
-      .letter {
-        width: 240px;
-
-        left: 20px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="container">
+  <div class="background-hearts" id="backgroundHearts"></div>
 
-    <div class="hint">
-      💌 你收到了一封信，点开看看
-    </div>
+  <main class="page">
 
-    <div
-      class="envelope"
-      id="envelope"
-      onclick="openLetter()"
-    >
+    <section class="hero">
 
-      <div class="letter">
+      <p class="eyebrow">
+        A MESSAGE FROM THE PAST
+      </p>
 
-        <div class="letter-content">
+      <h1>
+        A Letter to My Future Self
+      </h1>
 
-          <h2>
-            Hi 子禾羊：
-          </h2>
+      <p class="subtitle">
+        Some words are worth keeping.
+      </p>
 
-          <p>
-            这是一个全网最帅的人给你发的。
-          </p>
+    </section>
 
-          <p>
-            本来只是想写一封普通的信，
-            但是觉得普通的信有点太无聊了。
-          </p>
 
-          <p>
-            所以做成了一个网页。
-          </p>
+    <section class="letter-section">
 
-          <div class="buttons">
+      <p class="hint" id="hint">
+        💌 You received a letter. Click the envelope to open it.
+      </p>
+
+
+      <div
+        class="envelope"
+        id="envelope"
+        onclick="openLetter()"
+      >
+
+        <div class="flap"></div>
+
+
+        <div class="letter">
+
+          <div class="letter-content">
+
+            <p class="date">
+              To my future self,
+            </p>
+
+            <h2>
+              Dear Future Me,
+            </h2>
+
+            <div
+              class="message"
+              id="message"
+            ></div>
+
 
             <button
-              class="accept"
-              onclick="acceptLetter(event)"
+              class="continue-button"
+              id="continueButton"
+              onclick="finishLetter(event)"
             >
-              💖 接受
-            </button>
-
-            <button
-              class="reject"
-              id="rejectBtn"
-              onmouseover="moveButton()"
-            >
-              ❌ 不接受
+              ✨ I'll keep going
             </button>
 
           </div>
@@ -276,77 +80,12 @@
 
       </div>
 
-    </div>
+    </section>
 
-  </div>
-
-
-  <script>
-
-    let opened = false;
-
-    function openLetter() {
-
-      if (opened) {
-        return;
-      }
-
-      document
-        .getElementById("envelope")
-        .classList
-        .add("open");
-
-      opened = true;
-    }
+  </main>
 
 
-    function acceptLetter(event) {
-
-      event.stopPropagation();
-
-      document.body.innerHTML = `
-        <div style="
-          text-align:center;
-          font-family:Microsoft YaHei;
-        ">
-
-          <h1 style="
-            font-size:60px;
-          ">
-            💖
-          </h1>
-
-          <h2 style="
-            color:#e05b7d;
-          ">
-            我就知道你会点接受
-          </h2>
-
-          <p>
-            好啦，这封信你已经签收成功。
-          </p>
-
-        </div>
-      `;
-    }
-
-
-    function moveButton() {
-
-      const button =
-        document.getElementById("rejectBtn");
-
-      const x =
-        Math.random() * 200 - 100;
-
-      const y =
-        Math.random() * 120 - 60;
-
-      button.style.transform =
-        `translate(${x}px, ${y}px)`;
-    }
-
-  </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
