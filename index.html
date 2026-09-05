@@ -65,7 +65,7 @@
       <div
         class="envelope"
         id="envelope"
-        onclick="openLetter()"
+        onclick="openIntroLetter()"
       >
 
         <div class="flap"></div>
@@ -75,7 +75,7 @@
 
         <article
           class="letter"
-          id="letter"
+          id="introLetter"
         >
 
           <div class="letter-content">
@@ -90,14 +90,14 @@
 
             <div
               class="message"
-              id="message"
+              id="introMessage"
             ></div>
 
 
             <button
               class="continue-button"
               id="continueButton"
-              onclick="finishLetter(event)"
+              onclick="openWriter(event)"
             >
               ✨ I'll keep going
             </button>
@@ -133,7 +133,10 @@
       </p>
 
 
-      <div class="writer-card">
+      <div
+        class="writer-card"
+        id="writerCard"
+      >
 
         <label for="futureDate">
           Open this letter on
@@ -171,7 +174,7 @@ There is something I want you to remember..."
             class="save-button"
             onclick="saveLetter()"
           >
-            Save My Letter ✨
+            Seal My Letter 🔒
           </button>
 
         </div>
@@ -186,33 +189,111 @@ There is something I want you to remember..."
 
 
       <div
-        class="saved-letter"
-        id="savedLetter"
+        class="locked-card"
+        id="lockedCard"
       >
 
+        <div class="lock-icon">
+          🔒
+        </div>
+
         <p class="saved-label">
-          SAVED LETTER
+          TIME CAPSULE
         </p>
 
         <h2>
-          Your letter is waiting.
+          Your letter is sealed.
         </h2>
 
         <p
-          class="saved-date"
-          id="savedDate"
+          class="unlock-date"
+          id="unlockDate"
         ></p>
 
-        <p
-          class="saved-preview"
-          id="savedPreview"
-        ></p>
+
+        <div class="countdown">
+
+          <p class="countdown-label">
+            Opens in
+          </p>
+
+          <div
+            class="countdown-time"
+            id="countdownTime"
+          >
+            --
+          </div>
+
+        </div>
+
+
+        <p class="waiting-text">
+          Some words are worth waiting for.
+        </p>
+
 
         <button
           class="delete-button"
           onclick="deleteLetter()"
         >
-          Delete saved letter
+          Delete sealed letter
+        </button>
+
+      </div>
+
+
+      <div
+        class="ready-card"
+        id="readyCard"
+      >
+
+        <div class="ready-icon">
+          💌
+        </div>
+
+        <p class="saved-label">
+          YOUR LETTER IS READY
+        </p>
+
+        <h2>
+          A message from your past is waiting.
+        </h2>
+
+
+        <button
+          class="open-saved-button"
+          onclick="openSavedLetter()"
+        >
+          Open Letter
+        </button>
+
+      </div>
+
+
+      <div
+        class="opened-saved-letter"
+        id="openedSavedLetter"
+      >
+
+        <p class="saved-label">
+          FROM YOUR PAST SELF
+        </p>
+
+        <h2>
+          Dear Future Me,
+        </h2>
+
+        <div
+          class="saved-letter-content"
+          id="savedLetterContent"
+        ></div>
+
+
+        <button
+          class="delete-button"
+          onclick="deleteLetter()"
+        >
+          Delete letter
         </button>
 
       </div>
